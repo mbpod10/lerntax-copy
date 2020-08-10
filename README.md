@@ -7,6 +7,29 @@ I will keep user data in API and utilze 2, possibly 3 relational models in the A
 database for tax tables that will calulate taxes for those making less than \$100K. The main goal of this app is
 teach others tax knowlege they otherwise wouldn't understand.
 
+## Models
+
+```
+create_table "information", force: :cascade do |t|
+    t.string "name"
+    t.boolean "citizen"
+    t.integer "age"
+    t.string "marital_status"
+    t.string "address"
+    t.boolean "dependent"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+```
+
 ## API
 
 API Structure
