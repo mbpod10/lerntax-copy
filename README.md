@@ -30,6 +30,9 @@ create_table "information", force: :cascade do |t|
   end
 ```
 
+POSSIBLY MORE, WE WILL HAVE TO SEE HOW MVP TURNS OUT
+I MAY INCLUDE TAX TABLE API WITH MONGO (IT WILL SIMPLY COMPARE WITH USRE INPUT)
+
 ## API
 
 API Structure
