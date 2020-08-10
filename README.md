@@ -58,6 +58,7 @@ API Structure
           "updated_at": "2020-08-09T21:12:37.986Z",
           "user_id": 1
       }
+    ]
 ]
 
 
