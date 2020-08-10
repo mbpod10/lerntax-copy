@@ -38,28 +38,29 @@ I MAY INCLUDE TAX TABLE API WITH MONGO (IT WILL SIMPLY COMPARE WITH USRE INPUT)
 API Structure
 
 ```
-[
-  {
-    "id": 1,
-    "email": "m@gmail.com",
-    "password_digest": "$2a$12$O1s5Bl3616IfjKJLYTJTEO/4OOMQrz71cpnx.0xGV/8rm9XkROE7G",
-    "created_at": "2020-08-09T21:12:37.746Z",
-    "updated_at": "2020-08-09T21:12:37.746Z",
-    "information": [
-      {
-          "id": 1,
-          "name": "Kcorb Blansing",
-          "citizen": true,
-          "age": 25,
-          "marital_status": "single",
-          "address": "no",
-          "dependent": false,
-          "created_at": "2020-08-09T21:12:37.986Z",
-          "updated_at": "2020-08-09T21:12:37.986Z",
-          "user_id": 1
-      }
-    ]
-]
+  [
+    {
+      "id": 1,
+      "email": "m@gmail.com",
+      "password_digest": "$2a$12$O1s5Bl3616IfjKJLYTJTEO/4OOMQrz71cpnx.0xGV/8rm9XkROE7G",
+      "created_at": "2020-08-09T21:12:37.746Z",
+      "updated_at": "2020-08-09T21:12:37.746Z",
+      "information": [
+        {
+            "id": 1,
+            "name": "Kcorb Blansing",
+            "citizen": true,
+            "age": 25,
+            "marital_status": "single",
+            "address": "no",
+            "dependent": false,
+            "created_at": "2020-08-09T21:12:37.986Z",
+            "updated_at": "2020-08-09T21:12:37.986Z",
+            "user_id": 1
+        }
+      ]
+    }
+  ]
 
 
 ```
