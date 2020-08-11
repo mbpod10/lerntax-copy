@@ -4,6 +4,9 @@ import Home from "./components/Home";
 import { Switch, Route, Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
 import axios from "axios";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
@@ -59,20 +62,34 @@ function App() {
             <Link className="nav-link" to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/dashboard">
-              Dashboard
-            </Link>
+
+            {loggedIn === "LOGGED_IN" ? (
+              <>
+                <Link className="nav-link" to="/dashboard">
+                  Dashboard
+                </Link>
+                <Link className="nav-link" to={`/profile/${user.id}`}>
+                  Profile
+                </Link>
+              </>
+            ) : null}
           </ReactBootStrap.Nav>
-          <ReactBootStrap.Nav>
-            <Link className="nav-link" to="/basics">
-              Tax Basics
-            </Link>
-          </ReactBootStrap.Nav>
+          {loggedIn === "LOGGED_IN" ? (
+            <h6 className="nav-text">
+              {email} {loggedIn}
+            </h6>
+          ) : (
+            <ReactBootStrap.Nav>
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </ReactBootStrap.Nav>
+          )}
         </ReactBootStrap.Navbar.Collapse>
       </ReactBootStrap.Navbar>
 
       <Switch>
-        <>
+        <main>
           <Route
             exact
             path="/"
@@ -87,7 +104,45 @@ function App() {
               />
             )}
           />
-        </>
+          <Route
+            path="/dashboard"
+            render={(props) => (
+              <Dashboard
+                {...props}
+                email={email}
+                loggedInStatus={loggedIn}
+                user={user}
+                handleLogin={handleLogin}
+              />
+            )}
+          />
+          <Route
+            path="/login"
+            render={(props) => (
+              <Login
+                {...props}
+                user={user}
+                email={email}
+                loggedInStatus={loggedIn}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+              />
+            )}
+          />
+          <Route
+            path="/profile/:id"
+            render={(props) => (
+              <Profile
+                {...props}
+                user={user}
+                email={email}
+                loggedInStatus={loggedIn}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+              />
+            )}
+          />
+        </main>
       </Switch>
     </div>
   );

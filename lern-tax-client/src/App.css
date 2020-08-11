@@ -28,11 +28,25 @@
   color: #61dafb;
 }
 
-.form-div {
+/* .form-div {
+  width: 50%;
+  text-align: center;
+} */
+
+.nav-text {
+  color: white;
+}
+main {
+  padding: 50px;
+  text-align: center;
+}
+.table {
+  justify-content: center !important;
+}
+.login {
   width: 50%;
   text-align: center;
 }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

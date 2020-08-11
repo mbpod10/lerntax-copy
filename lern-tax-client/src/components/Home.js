@@ -79,8 +79,8 @@ const Home = (props) => {
   return (
     <>
       {props.email ? <h5>{props.email} </h5> : null}
-      <h1>Home</h1>
       <h4>Status: {props.loggedInStatus}</h4>
+      <h1>Home</h1>
       {props.loggedInStatus === "LOGGED_IN" ? null : (
         <Registration
           user={input}
@@ -90,9 +90,7 @@ const Home = (props) => {
         />
       )}
       {/* <Login handleSuccessfulAuth={handleSuccessfulAuth} /> */}
-      {props.loggedInStatus === "LOGGED_IN" ? null : (
-        <Link to="/login">Login</Link>
-      )}{" "}
+
       <br />
       {props.loggedInStatus === "LOGGED_IN" ? (
         <>
