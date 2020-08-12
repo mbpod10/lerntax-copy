@@ -28,10 +28,17 @@
   color: #61dafb;
 }
 
-/* .form-div {
+.form-div {
+  margin: auto;
   width: 50%;
   text-align: center;
-} */
+  border-color: grey 1px;
+}
+.form-div2 {
+  margin: auto;
+  width: 75%;
+  text-align: center;
+}
 
 .nav-text {
   color: white;
@@ -46,6 +53,25 @@ main {
 .login {
   width: 50%;
   text-align: center;
+}
+.about-car {
+  margin: auto;
+  width: 75%;
+}
+.tax-list {
+  margin: auto;
+  width: 50%;
+}
+
+.info-div {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+  /* margin: auto; */
+}
+
+.list-group2 {
+  width: 25%;
 }
 @keyframes App-logo-spin {
   from {

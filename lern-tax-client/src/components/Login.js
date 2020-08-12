@@ -65,12 +65,19 @@ const Login = (props) => {
       {props.loggedInStatus === "LOGGED_IN" ? (
         "Successful Login!"
       ) : (
-        <LoginForm
-          user={input}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleSuccessfulAuth={handleSuccessfulAuth}
-        />
+        <div className="form-div">
+          <LoginForm
+            user={input}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleSuccessfulAuth={handleSuccessfulAuth}
+          />
+          <br />
+          <h5>Don't Have An Account?</h5>
+          <h5>
+            Register <Link to="/">Here</Link>
+          </h5>
+        </div>
       )}
       <br />
 

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
 
 const AddInfo = ({ information, handleChange, handleSubmit }) => {
   let ageArray = [];
-  for (let i = 18; i < 101; i++) ageArray.push(i);
+  for (let i = 17; i < 101; i++) ageArray.push(i);
   //console.log(ageArray);
 
   const ageArrayOption = ageArray.map((element, index) => {
@@ -93,7 +94,7 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
           <ReactBootStrap.Form.Label>Name</ReactBootStrap.Form.Label>
           <ReactBootStrap.Form.Control
             type="name"
-            placeholder="Enter Name"
+            placeholder=""
             value={information.name}
             name="name"
             onChange={handleChange}
@@ -104,16 +105,18 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
           as={ReactBootStrap.Col}
           controlId="formGridState"
         >
-          <ReactBootStrap.Form.Label>Marital Status</ReactBootStrap.Form.Label>
+          <ReactBootStrap.Form.Label>
+            <Link to="/marital-status">Marital Status*</Link>
+          </ReactBootStrap.Form.Label>
           <ReactBootStrap.Form.Control
             as="select"
-            defaultValue="Choose..."
+            defaultValue=""
             value={information.marital_status}
             name="marital_status"
             onChange={handleChange}
             required
           >
-            <option>Choose...</option>
+            <option></option>
             <option>Single</option>
             <option>Head Of Household</option>
             <option>Married Filing Jointly</option>
@@ -130,13 +133,13 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
           <ReactBootStrap.Form.Label>State</ReactBootStrap.Form.Label>
           <ReactBootStrap.Form.Control
             as="select"
-            defaultValue="Choose..."
+            defaultValue=""
             value={information.state}
             name="state"
             onChange={handleChange}
             required
           >
-            <option>Choose...</option>
+            <option></option>
             {mappedStates}
           </ReactBootStrap.Form.Control>
         </ReactBootStrap.Form.Group>
@@ -148,13 +151,13 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
           <ReactBootStrap.Form.Control
             as="select"
             className="mr-sm-2"
-            defaultValue="Choose..."
+            defaultValue=""
             value={information.age}
             name="age"
             onChange={handleChange}
             required
           >
-            {/* /// <option>Choose...</option> */}
+            <option></option>
             {ageArrayOption}
           </ReactBootStrap.Form.Control>
         </ReactBootStrap.Form.Group>
@@ -163,17 +166,20 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
           as={ReactBootStrap.Col}
           controlId="formGridState"
         >
-          <ReactBootStrap.Form.Label>Depenendent</ReactBootStrap.Form.Label>
+          <ReactBootStrap.Form.Label>
+            <Link to="/dependent">Dependent*</Link>
+          </ReactBootStrap.Form.Label>
           <ReactBootStrap.Form.Control
             as="select"
-            defaultValue="Choose..."
+            defaultValue=" "
             value={information.dependent}
             name="dependent"
             onChange={handleChange}
             required
           >
-            <option> treu</option>
-            <option> false</option>
+            <option> </option>
+            <option>true</option>
+            <option>false</option>
           </ReactBootStrap.Form.Control>
         </ReactBootStrap.Form.Group>
       </ReactBootStrap.Form.Row>

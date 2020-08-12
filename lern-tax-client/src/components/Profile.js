@@ -37,40 +37,51 @@ const Profile = (props) => {
 
   const informationArray = information.map((element, index) => {
     return (
-      <>
-        <ReactBootStrap.Table striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Marital Staus</th>
-              <th>Dependent</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{element.name}</td>
-              <td>{element.marital_status}</td>
-              <td>{JSON.stringify(element.dependent)}</td>
-            </tr>
-          </tbody>
-        </ReactBootStrap.Table>
-        <ReactBootStrap.Table striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th>Age</th>
-              <th>State</th>
-              <th>Dependent</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{element.age}</td>
-              <td>{element.state}</td>
-              <td>{JSON.stringify(element.dependent)}</td>
-            </tr>
-          </tbody>
-        </ReactBootStrap.Table>
-      </>
+      <div className="info-div">
+        <ReactBootStrap.ListGroup className="list-group2">
+          <ReactBootStrap.ListGroup.Item variant="dark">
+            Name:
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            Marital Status:
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="dark">
+            Age:
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            Dependent:
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="dark">
+            State Of Residence:
+          </ReactBootStrap.ListGroup.Item>
+        </ReactBootStrap.ListGroup>
+
+        <ReactBootStrap.ListGroup className="list-group2">
+          <ReactBootStrap.ListGroup.Item variant="dark">
+            {element.name}
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            {element.marital_status}
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="dark">
+            {element.age}
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            {JSON.stringify(element.dependent)}
+          </ReactBootStrap.ListGroup.Item>
+
+          <ReactBootStrap.ListGroup.Item variant="dark">
+            {element.state}
+          </ReactBootStrap.ListGroup.Item>
+        </ReactBootStrap.ListGroup>
+      </div>
     );
   });
 
@@ -80,8 +91,8 @@ const Profile = (props) => {
       <h1>Profile</h1>
       <h1>Page</h1>
       <h4>Status: {props.loggedInStatus}</h4>
-      <Link to="/">Home</Link> <br />
       {user ? informationArray : null}
+      <Link to={`/information/${props.user.id}`}>Edit Profile Here</Link>
     </>
   );
 };

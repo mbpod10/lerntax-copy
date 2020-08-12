@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Home = (props) => {
-  console.log("Add props", props.match.params.id);
+  //console.log("Add props", props.match.params.id);
   console.log("user", props.user);
   //console.log(props);
   const [input, setInput] = useState({
@@ -29,7 +29,7 @@ const Home = (props) => {
     axios
       .delete("http://localhost:3000/logout", { withCredentials: true })
       .then((response) => {
-        console.log("logout", response);
+        //console.log("logout", response);
         props.handleLogout();
         window.location.reload();
         props.history.push("/");
@@ -40,7 +40,7 @@ const Home = (props) => {
   };
 
   const handleChange = (event) => {
-    console.log("event", event.target.name, event.target.value);
+    //console.log("event", event.target.name, event.target.value);
     setInput({
       ...input,
       [event.target.name]: event.target.value,
@@ -48,7 +48,7 @@ const Home = (props) => {
   };
 
   const handleSubmit = (event) => {
-    console.log("form submitted");
+    //console.log("form submitted");
     event.preventDefault();
     axios
       .post(
@@ -63,7 +63,7 @@ const Home = (props) => {
         { withCredentials: true }
       )
       .then((resonse) => {
-        console.log("registration log", resonse);
+        //console.log("registration log", resonse);
         if (resonse.data.status === "created") {
           handleSuccessfulAuth(resonse.data);
         } else {
@@ -82,21 +82,28 @@ const Home = (props) => {
       <h4>Status: {props.loggedInStatus}</h4>
       <h1>Home</h1>
       {props.loggedInStatus === "LOGGED_IN" ? null : (
-        <Registration
-          user={input}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleSuccessfulAuth={handleSuccessfulAuth}
-        />
+        <div className="form-div">
+          <Registration
+            user={input}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleSuccessfulAuth={handleSuccessfulAuth}
+          />
+          <br />
+          <h5>Already Have An Account?</h5>
+          <h5>
+            Sign In <Link to="/login">Here</Link>
+          </h5>
+        </div>
       )}
       {/* <Login handleSuccessfulAuth={handleSuccessfulAuth} /> */}
 
       <br />
       {props.loggedInStatus === "LOGGED_IN" ? (
         <>
-          <Link to={`/profile/${props.user.id}`}> View Profile</Link> <br />
-          <Link to="/dashboard">Dashboard</Link> <br />
-          <button onClick={() => handleLogoutClick()}>Logout</button> <br />
+          {/* <Link to={`/profile/${props.user.id}`}> View Profile</Link> <br />
+          <Link to="/dashboard">Dashboard</Link> <br /> */}
+          {/* <button onClick={() => handleLogoutClick()}>Logout</button> <br /> */}
         </>
       ) : null}
       <h4>{errorStatus}</h4>

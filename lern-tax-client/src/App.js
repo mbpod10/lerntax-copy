@@ -7,7 +7,9 @@ import axios from "axios";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
-
+import About from "./components/About";
+import EditInformation from "./components/EditInformation";
+import TaxList from "./statics/TaxList";
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
   const [user, setUser] = useState({});
@@ -44,7 +46,21 @@ function App() {
     setLoggedIn("NOT_LOGGED_IN");
     setUser({});
   };
-  console.log(email);
+  //console.log(email);
+
+  const handleLogoutClick = () => {
+    axios
+      .delete("http://localhost:3000/logout", { withCredentials: true })
+      .then((response) => {
+        //console.log("logout", response);
+        handleLogout();
+        window.location.reload();
+        //props.history.push("/");
+      })
+      .catch((error) => {
+        console.log("Logout error", error);
+      });
+  };
 
   return (
     <div className="App">
@@ -62,7 +78,12 @@ function App() {
             <Link className="nav-link" to="/">
               Home
             </Link>
-
+            <Link className="nav-link" to="/about">
+              LernTax
+            </Link>
+            <Link className="nav-link" to="/tax-basics">
+              Tax Basics
+            </Link>
             {loggedIn === "LOGGED_IN" ? (
               <>
                 <Link className="nav-link" to="/dashboard">
@@ -75,9 +96,18 @@ function App() {
             ) : null}
           </ReactBootStrap.Nav>
           {loggedIn === "LOGGED_IN" ? (
-            <h6 className="nav-text">
-              {email} {loggedIn}
-            </h6>
+            <>
+              <Link className="nav-link" to="/">
+                {email}
+              </Link>
+              <Link
+                className="nav-link"
+                onClick={() => handleLogoutClick()}
+                to="/"
+              >
+                Logout
+              </Link>
+            </>
           ) : (
             <ReactBootStrap.Nav>
               <Link className="nav-link" to="/login">
@@ -109,9 +139,9 @@ function App() {
             render={(props) => (
               <Dashboard
                 {...props}
+                user={user}
                 email={email}
                 loggedInStatus={loggedIn}
-                user={user}
                 handleLogin={handleLogin}
               />
             )}
@@ -142,6 +172,33 @@ function App() {
               />
             )}
           />
+          <Route
+            path="/information/:id"
+            render={(props) => (
+              <EditInformation
+                {...props}
+                user={user}
+                email={email}
+                loggedInStatus={loggedIn}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+              />
+            )}
+          />
+          <Route
+            path="/about"
+            render={(props) => (
+              <About
+                {...props}
+                user={user}
+                email={email}
+                loggedInStatus={loggedIn}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+              />
+            )}
+          />
+          <Route path="/tax-basics" component={TaxList} />
         </main>
       </Switch>
     </div>

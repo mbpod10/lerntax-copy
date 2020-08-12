@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import AddInfo from "../components/info/AddInfo";
 import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
-
-const Dashboard = (props) => {
+const EditInformation = (props) => {
   console.log("user", props);
   const [info, setInfo] = useState(null);
   const [userId, setUserId] = useState(props.user.id);
@@ -58,7 +57,7 @@ const Dashboard = (props) => {
       dependency = false;
     }
     axios
-      .post("http://localhost:3000/information", {
+      .put(`http://localhost:3000/information/${props.match.params.id}`, {
         name: input.name,
         state: input.state,
         age: parsedAge,
@@ -68,7 +67,7 @@ const Dashboard = (props) => {
       })
       .then((resonse) => {
         console.log("res from  login", resonse);
-        // props.history.push(`/profile/${props.user.id}`);
+        props.history.push(`/profile/${props.user.id}`);
       })
       .catch((error) => {
         console.log("login error", error);
@@ -79,37 +78,29 @@ const Dashboard = (props) => {
 
   return (
     <>
-      {props.email ? <h5>{props.email} Logged In</h5> : null}
-      <h1>Dashboard</h1>
-      <h4>Status: {props.loggedInStatus}</h4>
+      {/* {props.email ? <h5>{props.email} Logged In</h5> : null}
+      <h4>Status: {props.loggedInStatus}</h4> */}
+      <h1>Edit Profile</h1>
+
       <br />
 
       {/* {props.user.information ? ( */}
       <div className="form-div2">
-        <h3>Let's Add Some Information</h3>
         <AddInfo
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           information={input}
         />
-        <br />
-        <ReactBootStrap.ListGroup>
-          <ReactBootStrap.ListGroup.Item variant="danger">
-            <Link to={`/information/${props.user.id}`}>
-              If You Have Information, Edit Profile Here
-            </Link>
-          </ReactBootStrap.ListGroup.Item>
-        </ReactBootStrap.ListGroup>
       </div>
       {/* ) : (
-        <>
-          <h4>You Have Sucessfully Loged Info</h4>
-          <Link to={`/profile/${props.user.id}`}>View Profile</Link>
-        </>
-      )} */}
+          <>
+            <h4>You Have Sucessfully Loged Info</h4>
+            <Link to={`/profile/${props.user.id}`}>View Profile</Link>
+          </>
+        )} */}
       {error ? error : null}
     </>
   );
 };
 
-export default Dashboard;
+export default EditInformation;
