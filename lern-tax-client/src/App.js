@@ -64,6 +64,15 @@ function App() {
 
   return (
     <div className="App">
+      <ReactBootStrap.Jumbotron fluid>
+        <ReactBootStrap.Container>
+          <h1>Lern Tax</h1>
+          <p>
+            This is a modified jumbotron that occupies the entire horizontal
+            space of its parent.
+          </p>
+        </ReactBootStrap.Container>
+      </ReactBootStrap.Jumbotron>
       <ReactBootStrap.Navbar
         collapseOnSelect
         expand="lg"

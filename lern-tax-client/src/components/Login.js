@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "../components/auth/LoginForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import * as ReactBootStrap from "react-bootstrap";
 
 const Login = (props) => {
   //console.log("Add props", props.match.params.id);
@@ -80,8 +81,13 @@ const Login = (props) => {
         </div>
       )}
       <br />
-
-      <h4>{errorStatus}</h4>
+      {errorStatus ? (
+        <ReactBootStrap.ListGroup>
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            {errorStatus}
+          </ReactBootStrap.ListGroup.Item>
+        </ReactBootStrap.ListGroup>
+      ) : null}
     </div>
   );
 };

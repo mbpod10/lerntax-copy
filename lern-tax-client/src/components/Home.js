@@ -3,6 +3,7 @@ import Registration from "../components/auth/Registration";
 import axios from "axios";
 // import Login from "./Login";
 import { Link } from "react-router-dom";
+import * as ReactBootStrap from "react-bootstrap";
 
 const Home = (props) => {
   //console.log("Add props", props.match.params.id);
@@ -90,6 +91,7 @@ const Home = (props) => {
             handleSuccessfulAuth={handleSuccessfulAuth}
           />
           <br />
+
           <h5>Already Have An Account?</h5>
           <h5>
             Sign In <Link to="/login">Here</Link>
@@ -106,7 +108,13 @@ const Home = (props) => {
           {/* <button onClick={() => handleLogoutClick()}>Logout</button> <br /> */}
         </>
       ) : null}
-      <h4>{errorStatus}</h4>
+      {errorStatus ? (
+        <ReactBootStrap.ListGroup>
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            {errorStatus}
+          </ReactBootStrap.ListGroup.Item>
+        </ReactBootStrap.ListGroup>
+      ) : null}
     </>
   );
 };
