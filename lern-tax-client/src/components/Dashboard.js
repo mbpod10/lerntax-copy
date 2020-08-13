@@ -6,14 +6,14 @@ import * as ReactBootStrap from "react-bootstrap";
 import APIConfig from "../APIConfig";
 
 const Dashboard = (props) => {
-  console.log("user", props);
+  //console.log("user", props);
   const [info, setInfo] = useState(null);
   const [userId, setUserId] = useState(props.user.id);
   // console.log(userId);
   const [error, setError] = useState("");
   const [user, setUser] = useState({});
   const [userInfo, setUserInfo] = useState([]);
-  console.log("usestate user", user);
+  //console.log("usestate user", user);
   const [input, setInput] = useState({
     name: "",
     state: "",
@@ -23,7 +23,7 @@ const Dashboard = (props) => {
   });
 
   //console.log(input);
-  console.log("Dashboard user", props.user);
+  //console.log("Dashboard user", props.user);
 
   useEffect(() => {
     const createUser = () => {
@@ -69,14 +69,15 @@ const Dashboard = (props) => {
       })
       .then((resonse) => {
         console.log("res from  login", resonse);
-        // props.history.push(`/profile/${props.user.id}`);
+        props.history.push(`/profile/${props.user.id}`);
+        window.location.reload();
       })
       .catch((error) => {
         console.log("login error", error);
       });
     //}
   };
-  console.log("PROPS USER", user);
+  //console.log("PROPS USER", user);
 
   return (
     <>

@@ -98,7 +98,7 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
             value={information.name}
             name="name"
             onChange={handleChange}
-            required
+            // required
           />
         </ReactBootStrap.Form.Group>
         <ReactBootStrap.Form.Group
@@ -114,7 +114,7 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
             value={information.marital_status}
             name="marital_status"
             onChange={handleChange}
-            required
+            // required
           >
             <option></option>
             <option>Single</option>
@@ -137,7 +137,7 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
             value={information.state}
             name="state"
             onChange={handleChange}
-            required
+            // required
           >
             <option></option>
             {mappedStates}
@@ -155,7 +155,7 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
             value={information.age}
             name="age"
             onChange={handleChange}
-            required
+            // required
           >
             <option></option>
             {ageArrayOption}
@@ -175,7 +175,7 @@ const AddInfo = ({ information, handleChange, handleSubmit }) => {
             value={information.dependent}
             name="dependent"
             onChange={handleChange}
-            required
+            // required
           >
             <option> </option>
             <option>true</option>

@@ -20,8 +20,8 @@ const Login = (props) => {
 
   const handleSuccessfulAuth = (data) => {
     props.handleLogin(data);
+    props.history.push("/");
     window.location.reload();
-    props.history.push("/dashboard");
   };
 
   const handleChange = (event) => {

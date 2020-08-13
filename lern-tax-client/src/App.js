@@ -15,6 +15,8 @@ import GrossTaxableIncome from "./statics/GrossTaxableIncome";
 import AGI from "./statics/AGI";
 import ItemizedDeductions from "./statics/ItemizedDeductions";
 import StandardDeductions from "./statics/StandardDeduction";
+import CalcTax from "./components/CalcTax";
+import TaxInfo from "./components/TaxInfo";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
@@ -96,6 +98,9 @@ function App() {
             <Link className="nav-link" to="/tax-basics">
               Tax Basics
             </Link>
+            <Link className="nav-link" to="/calc-tax">
+              Calc
+            </Link>
             {loggedIn === "LOGGED_IN" ? (
               <>
                 <Link className="nav-link" to="/dashboard">
@@ -131,91 +136,110 @@ function App() {
       </ReactBootStrap.Navbar>
 
       <Switch>
-        <main>
-          <Route
-            exact
-            path="/"
-            render={(props) => (
-              <Home
-                {...props}
-                email={email}
-                user={user}
-                loggedInStatus={loggedIn}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-              />
-            )}
-          />
-          <Route
-            path="/dashboard"
-            render={(props) => (
-              <Dashboard
-                {...props}
-                user={user}
-                email={email}
-                loggedInStatus={loggedIn}
-                handleLogin={handleLogin}
-              />
-            )}
-          />
-          <Route
-            path="/login"
-            render={(props) => (
-              <Login
-                {...props}
-                user={user}
-                email={email}
-                loggedInStatus={loggedIn}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-              />
-            )}
-          />
-          <Route
-            path="/profile/:id"
-            render={(props) => (
-              <Profile
-                {...props}
-                user={user}
-                email={email}
-                loggedInStatus={loggedIn}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-              />
-            )}
-          />
-          <Route
-            path="/information/:id"
-            render={(props) => (
-              <EditInformation
-                {...props}
-                user={user}
-                email={email}
-                loggedInStatus={loggedIn}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-              />
-            )}
-          />
-          <Route
-            path="/about"
-            render={(props) => (
-              <About
-                {...props}
-                user={user}
-                email={email}
-                loggedInStatus={loggedIn}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-              />
-            )}
-          />
-          <Route path="/tax-basics" component={TaxList} />
-          <Route path="/gross-taxable-income" component={GrossTaxableIncome} />
-          <Route path="/adjustable-gross-income" component={AGI} />
-          <Route path="/itemized-deductions" component={ItemizedDeductions} />
-          <Route path="/standard-deduction" component={StandardDeductions} />
-        </main>
+        <React.Fragment>
+          <main>
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <Home
+                  {...props}
+                  email={email}
+                  user={user}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                />
+              )}
+            />
+            <Route
+              path="/dashboard"
+              render={(props) => (
+                <Dashboard
+                  {...props}
+                  user={user}
+                  email={email}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                />
+              )}
+            />
+            <Route
+              path="/login"
+              render={(props) => (
+                <Login
+                  {...props}
+                  user={user}
+                  email={email}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                />
+              )}
+            />
+            <Route
+              path="/profile/:id"
+              render={(props) => (
+                <Profile
+                  {...props}
+                  user={user}
+                  email={email}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                />
+              )}
+            />
+            <Route
+              path="/information/:id"
+              render={(props) => (
+                <EditInformation
+                  {...props}
+                  user={user}
+                  email={email}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                />
+              )}
+            />
+            <Route
+              path="/about"
+              render={(props) => (
+                <About
+                  {...props}
+                  user={user}
+                  email={email}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                />
+              )}
+            />
+            <Route
+              path="/tax-information/:id"
+              render={(props) => (
+                <TaxInfo
+                  {...props}
+                  user={user}
+                  email={email}
+                  loggedInStatus={loggedIn}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                />
+              )}
+            />
+            <Route path="/calc-tax" component={CalcTax} />
+            <Route path="/tax-basics" component={TaxList} />
+            <Route
+              path="/gross-taxable-income"
+              component={GrossTaxableIncome}
+            />
+            <Route path="/adjustable-gross-income" component={AGI} />
+            <Route path="/itemized-deductions" component={ItemizedDeductions} />
+            <Route path="/standard-deduction" component={StandardDeductions} />
+          </main>
+        </React.Fragment>
       </Switch>
     </div>
   );

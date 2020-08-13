@@ -8,7 +8,7 @@ import APIConfig from "../APIConfig";
 
 const Home = (props) => {
   //console.log("Add props", props.match.params.id);
-  console.log("user", props.user);
+  //console.log("user", props.user);
   //console.log(props);
   const [input, setInput] = useState({
     user: {
@@ -80,6 +80,7 @@ const Home = (props) => {
         // setErrorStatus(response.data.status);
       });
   };
+  //console.log(props.user);
   return (
     <>
       {props.email ? <h5>{props.email} </h5> : null}

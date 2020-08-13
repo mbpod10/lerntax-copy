@@ -26,6 +26,7 @@ const Profile = (props) => {
         //console.log("response", response);
         console.log("response", response);
         setInfo(response.data.information);
+        console.log("taxstuff", response.data.information);
         setName(response.data.information.name);
         console.log(response.data.information.name);
       } catch (err) {
@@ -93,7 +94,10 @@ const Profile = (props) => {
       {/* 
       <h4>Status: {props.loggedInStatus}</h4> */}
       {user ? informationArray : null}
-      <Link to={`/information/${props.user.id}`}>Edit Profile Here</Link>
+      <Link to={`/information/${props.user.id}`}>Edit Profile Here</Link> <br />
+      {/* <Link to={`/tax-information/${props.user.information[0].id}`}>
+        Add Tax Information Here
+      </Link> */}
     </>
   );
 };
