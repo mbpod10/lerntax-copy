@@ -3,6 +3,7 @@ import LoginForm from "../components/auth/LoginForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
+import APIConfig from "../APIConfig";
 
 const Login = (props) => {
   //console.log("Add props", props.match.params.id);
@@ -20,7 +21,7 @@ const Login = (props) => {
   const handleSuccessfulAuth = (data) => {
     props.handleLogin(data);
     window.location.reload();
-    props.history.push("/");
+    props.history.push("/dashboard");
   };
 
   const handleChange = (event) => {
@@ -36,7 +37,7 @@ const Login = (props) => {
     event.preventDefault();
     axios
       .post(
-        "http://localhost:3000/sessions",
+        `${APIConfig}/sessions`,
         {
           user: {
             email: input.email,
@@ -50,7 +51,7 @@ const Login = (props) => {
         if (resonse.data.logged_in) {
           handleSuccessfulAuth(resonse.data);
           // window.location.reload();
-          // props.history.push("/");
+          // props.history.push(`/dashboard`);
         } else {
           setErrorStatus(resonse.data.status);
         }

@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import AddInfo from "../components/info/AddInfo";
 import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
+import APIConfig from "../APIConfig";
 const EditInformation = (props) => {
-  console.log("user", props);
+  //console.log("user", props);
   const [info, setInfo] = useState(null);
   const [userId, setUserId] = useState(props.user.id);
   // console.log(userId);
   const [error, setError] = useState("");
   const [user, setUser] = useState({});
   const [userInfo, setUserInfo] = useState([]);
-  console.log("usestate user", user);
+  //console.log("usestate user", user);
   const [input, setInput] = useState({
     name: "",
     state: "",
@@ -21,7 +22,7 @@ const EditInformation = (props) => {
   });
 
   //console.log(input);
-  console.log("Dashboard user", props.user);
+  //console.log("Dashboard user", props.user);
 
   useEffect(() => {
     const createUser = () => {
@@ -31,7 +32,7 @@ const EditInformation = (props) => {
   }, []);
 
   const handleChange = (event) => {
-    console.log("event", event.target.name, event.target.value);
+    // console.log("event", event.target.name, event.target.value);
     setInput({
       ...input,
       [event.target.name]: event.target.value,
@@ -39,17 +40,17 @@ const EditInformation = (props) => {
   };
 
   const handleSubmit = (event) => {
-    console.log("form submitted");
+    //console.log("form submitted");
     event.preventDefault();
-    setUser(props.user);
-
+    //setUser(props.user);
+    console.log(user);
     // if (props.user.information.length > 0) {
     //   setError("You Already Have Information");
     // } else {
-    console.log(input.age);
+    //console.log(input.age);
     let parsedAge = parseInt(input.age, 10);
     //console.log(parsedAge);
-    console.log("Dependent!!!", input.dependent);
+    //console.log("Dependent!!!", input.dependent);
     let dependency;
     if (input.dependent === "true") {
       dependency = true;
@@ -57,7 +58,7 @@ const EditInformation = (props) => {
       dependency = false;
     }
     axios
-      .put(`http://localhost:3000/information/${props.match.params.id}`, {
+      .put(`${APIConfig}/information/${props.user.information[0].id}.json`, {
         name: input.name,
         state: input.state,
         age: parsedAge,
@@ -67,14 +68,14 @@ const EditInformation = (props) => {
       })
       .then((resonse) => {
         console.log("res from  login", resonse);
-        props.history.push(`/profile/${props.user.id}`);
+        props.history.push(`/profile/${props.match.params.id}`);
       })
       .catch((error) => {
         console.log("login error", error);
       });
     //}
   };
-  console.log("PROPS USER", user);
+  //console.log("PROPS USER", user);
 
   return (
     <>

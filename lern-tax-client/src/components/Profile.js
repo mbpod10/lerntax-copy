@@ -3,6 +3,7 @@ import Registration from "../components/auth/Registration";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
+import APIConfig from "../APIConfig";
 
 const Profile = (props) => {
   const [user, setUser] = useState({});
@@ -20,7 +21,7 @@ const Profile = (props) => {
       //console.log(props.match.params);
       try {
         const response = await axios(
-          `http://localhost:3000/users/${props.match.params.id}}`
+          `${APIConfig}/users/${props.match.params.id}}`
         );
         //console.log("response", response);
         console.log("response", response);
@@ -87,10 +88,10 @@ const Profile = (props) => {
 
   return (
     <>
-      {props.email ? <h5>{props.email} Logged In</h5> : null}
+      {/* {props.email ? <h5>{props.email} Logged In</h5> : null} */}
       <h1>Profile</h1>
-      <h1>Page</h1>
-      <h4>Status: {props.loggedInStatus}</h4>
+      {/* 
+      <h4>Status: {props.loggedInStatus}</h4> */}
       {user ? informationArray : null}
       <Link to={`/information/${props.user.id}`}>Edit Profile Here</Link>
     </>

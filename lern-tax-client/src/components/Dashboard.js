@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AddInfo from "../components/info/AddInfo";
 import axios from "axios";
 import * as ReactBootStrap from "react-bootstrap";
+import APIConfig from "../APIConfig";
 
 const Dashboard = (props) => {
   console.log("user", props);
@@ -58,7 +59,7 @@ const Dashboard = (props) => {
       dependency = false;
     }
     axios
-      .post("http://localhost:3000/information", {
+      .post(`${APIConfig}/information`, {
         name: input.name,
         state: input.state,
         age: parsedAge,

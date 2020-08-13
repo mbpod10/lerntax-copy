@@ -58,9 +58,9 @@ main {
   margin: auto;
   width: 75%;
 }
-.tax-list {
+.tax-steps {
   margin: auto;
-  width: 50%;
+  width: 75%;
 }
 
 .info-div {
@@ -75,12 +75,16 @@ main {
 }
 body {
   /* background: radial-gradient(600px at 50% 50%, #fff 20%, #000 100%); */
-  /* background-color: black; */
+  background-color: darkgray;
 }
 
 .jumbotron {
   margin-bottom: 0;
-  background: radial-gradient(600px at 50% 50%, #fff 20%, #000 100%);
+  background: radial-gradient(
+    600px at 50% 50%,
+    rgba(255, 255, 255, 0.87) 20%,
+    rgba(0, 0, 0, 0.959) 100%
+  );
 }
 
 @keyframes App-logo-spin {
@@ -89,5 +93,10 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 2rem 2rem;
   }
 }

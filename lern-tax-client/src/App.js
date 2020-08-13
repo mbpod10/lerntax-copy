@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Home from "./components/Home";
+import APIConfig from "./APIConfig";
 import { Switch, Route, Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
 import axios from "axios";
@@ -10,6 +11,11 @@ import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import EditInformation from "./components/EditInformation";
 import TaxList from "./statics/TaxList";
+import GrossTaxableIncome from "./statics/GrossTaxableIncome";
+import AGI from "./statics/AGI";
+import ItemizedDeductions from "./statics/ItemizedDeductions";
+import StandardDeductions from "./statics/StandardDeduction";
+
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
   const [user, setUser] = useState({});
@@ -23,7 +29,7 @@ function App() {
   useEffect(() => {
     const checkLoginStatus = () => {
       axios
-        .get("http://localhost:3000/logged_in", { withCredentials: true })
+        .get(`${APIConfig}/logged_in`, { withCredentials: true })
         .then((response) => {
           //console.log("logged in?", response);
           if (response.data.logged_in && loggedIn === "NOT_LOGGED_IN") {
@@ -50,7 +56,7 @@ function App() {
 
   const handleLogoutClick = () => {
     axios
-      .delete("http://localhost:3000/logout", { withCredentials: true })
+      .delete(`${APIConfig}/logout`, { withCredentials: true })
       .then((response) => {
         //console.log("logout", response);
         handleLogout();
@@ -67,10 +73,7 @@ function App() {
       <ReactBootStrap.Jumbotron fluid>
         <ReactBootStrap.Container>
           <h1>Lern Tax</h1>
-          <p>
-            This is a modified jumbotron that occupies the entire horizontal
-            space of its parent.
-          </p>
+          <p>Where We Make Taxes Easy To Understand</p>
         </ReactBootStrap.Container>
       </ReactBootStrap.Jumbotron>
       <ReactBootStrap.Navbar
@@ -208,6 +211,10 @@ function App() {
             )}
           />
           <Route path="/tax-basics" component={TaxList} />
+          <Route path="/gross-taxable-income" component={GrossTaxableIncome} />
+          <Route path="/adjustable-gross-income" component={AGI} />
+          <Route path="/itemized-deductions" component={ItemizedDeductions} />
+          <Route path="/standard-deduction" component={StandardDeductions} />
         </main>
       </Switch>
     </div>

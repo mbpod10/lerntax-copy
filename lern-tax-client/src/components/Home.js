@@ -4,6 +4,7 @@ import axios from "axios";
 // import Login from "./Login";
 import { Link } from "react-router-dom";
 import * as ReactBootStrap from "react-bootstrap";
+import APIConfig from "../APIConfig";
 
 const Home = (props) => {
   //console.log("Add props", props.match.params.id);
@@ -28,7 +29,7 @@ const Home = (props) => {
 
   const handleLogoutClick = () => {
     axios
-      .delete("http://localhost:3000/logout", { withCredentials: true })
+      .delete(`${APIConfig}/logout`, { withCredentials: true })
       .then((response) => {
         //console.log("logout", response);
         props.handleLogout();
@@ -53,7 +54,7 @@ const Home = (props) => {
     event.preventDefault();
     axios
       .post(
-        "http://localhost:3000/registrations",
+        `${APIConfig}/registrations`,
         {
           user: {
             email: input.email,
@@ -67,6 +68,8 @@ const Home = (props) => {
         //console.log("registration log", resonse);
         if (resonse.data.status === "created") {
           handleSuccessfulAuth(resonse.data);
+          window.location.reload();
+          props.history.push(`/`);
         } else {
           setErrorStatus(resonse.data.status);
         }
