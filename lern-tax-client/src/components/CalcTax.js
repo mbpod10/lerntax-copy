@@ -1,38 +1,39 @@
 import React, { useState } from "react";
 import CalcTaxForm from "../components/auth/CalcTaxForm";
+import * as ReactBootStrap from "react-bootstrap";
 
 const CalcTax = () => {
-  const [input, setInput] = useState({
-    income: null,
-  });
+  const [w2Income, setw2Income] = useState(null);
 
-  const handleChange = (event) => {
-    console.log("event", event.target.name, event.target.value);
-    setInput({ [event.target.name]: event.target.value });
+  const handleChange1 = (event) => {
+    setw2Income(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //const parseInt = parseInt(input.income, 10);
-    //console.log(parseInt);
-    console.log(input);
+    const parsedInt = parseInt(w2Income, 10);
+    console.log(parsedInt);
   };
 
   return (
     <>
       <h1>Calculate Tax</h1>
-      <h1>Num</h1>
-      {/* <input
-        type="text"
-        onChange={() => handleChange()}
-        value={taxableIncome}
-        information={input}
-      /> */}
-      <CalcTaxForm
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        information={input}
-      />
+      <ReactBootStrap.Form onSubmit={handleSubmit}>
+        <ReactBootStrap.Form.Group controlId="formBasicEmail">
+          <ReactBootStrap.Form.Label>W2 Income</ReactBootStrap.Form.Label>
+          <ReactBootStrap.Form.Control
+            value={w2Income}
+            name="income"
+            onChange={handleChange1}
+            required
+          />
+        </ReactBootStrap.Form.Group>
+        {w2Income ? (
+          <ReactBootStrap.Button variant="primary" type="submit">
+            Calculate
+          </ReactBootStrap.Button>
+        ) : null}
+      </ReactBootStrap.Form>
     </>
   );
 };

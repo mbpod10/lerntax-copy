@@ -24,3 +24,4 @@ yarn-error.log*
 
 apiConfig.js
 ../lern-tax-client/src/APIConfig
+/build

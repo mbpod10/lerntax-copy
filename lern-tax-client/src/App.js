@@ -217,7 +217,7 @@ function App() {
               )}
             />
             <Route
-              path="/tax-information/:id"
+              path="/tax-information"
               render={(props) => (
                 <TaxInfo
                   {...props}

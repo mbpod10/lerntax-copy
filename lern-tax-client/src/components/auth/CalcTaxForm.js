@@ -1,13 +1,13 @@
 import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
 
-const CalcTaxForm = ({ information, handleChange, handleSubmit }) => {
+const CalcTaxForm = ({ input, handleChange, handleSubmit }) => {
   return (
     <ReactBootStrap.Form onSubmit={handleSubmit}>
       <ReactBootStrap.Form.Group controlId="formBasicEmail">
         <ReactBootStrap.Form.Label>Email</ReactBootStrap.Form.Label>
         <ReactBootStrap.Form.Control
-          value={information.income}
+          value={input}
           name="income"
           onChange={handleChange}
           required
