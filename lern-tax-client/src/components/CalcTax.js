@@ -59,6 +59,90 @@ const CalcTax = () => {
         prevTax: 35013,
       },
     },
+    hoh: {
+      bracket1: {
+        bracketTop: 13851,
+        taxRate: 0.1,
+        prevTax: null,
+      },
+      bracket2: {
+        bracketTop: 52851,
+        taxRate: 0.12,
+        prevTax: 1385,
+      },
+      bracket3: {
+        bracketTop: 84201,
+        taxRate: 0.22,
+        prevTax: 6062,
+      },
+      bracket4: {
+        bracketTop: 100001,
+        taxRate: 0.24,
+        prevTax: 12968,
+      },
+      bracket5: {
+        bracketTop: 160000,
+        taxRate: 0.24,
+        prevTax: 7246,
+      },
+      bracket6: {
+        bracketTop: 204100,
+        taxRate: 0.32,
+        prevTax: 20102,
+      },
+      bracket7: {
+        bracketTop: 510300,
+        taxRate: 0.35,
+        prevTax: 26225,
+      },
+      bracket8: {
+        bracketTop: null,
+        taxRate: 0.37,
+        prevTax: 36431,
+      },
+    },
+    mfj: {
+      bracket1: {
+        bracketTop: 13851,
+        taxRate: 0.1,
+        prevTax: null,
+      },
+      bracket2: {
+        bracketTop: 52851,
+        taxRate: 0.12,
+        prevTax: 1385,
+      },
+      bracket3: {
+        bracketTop: 84201,
+        taxRate: 0.22,
+        prevTax: 6062,
+      },
+      bracket4: {
+        bracketTop: 100001,
+        taxRate: 0.24,
+        prevTax: 12968,
+      },
+      bracket5: {
+        bracketTop: 160000,
+        taxRate: 0.24,
+        prevTax: 7246,
+      },
+      bracket6: {
+        bracketTop: 204100,
+        taxRate: 0.32,
+        prevTax: 20102,
+      },
+      bracket7: {
+        bracketTop: 510300,
+        taxRate: 0.35,
+        prevTax: 26225,
+      },
+      bracket8: {
+        bracketTop: null,
+        taxRate: 0.37,
+        prevTax: 36431,
+      },
+    },
   };
 
   const handleChange1 = (event) => {
@@ -101,59 +185,130 @@ const CalcTax = () => {
     const parsedAdd = parseInt(addIncome, 10);
     const parseAdjustments = parseInt(adjustments, 10);
     let parsedStandardDeduction = 0;
-    if (
-      standardDeduction === "Single $12,200" ||
-      standardDeduction === "Married Filing Seperately $12,200"
-    ) {
+    let parsedTL = 0;
+    if (standardDeduction === "Single $12,200") {
       parsedStandardDeduction = 12200;
+      let taxInVar =
+        parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction;
+      if (taxInVar < 0) {
+        setTaxableIncome(0);
+      } else if (taxInVar < data.single.bracket1.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL = taxInVar * data.single.bracket1.taxRate;
+      } else if (taxInVar < data.single.bracket2.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.single.bracket1.bracketTop;
+        parsedTL =
+          data.single.bracket2.prevTax + temp * data.single.bracket2.taxRate;
+      } else if (taxInVar < data.single.bracket3.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.single.bracket2.bracketTop;
+        parsedTL =
+          data.single.bracket3.prevTax + temp * data.single.bracket3.taxRate;
+      } else if (taxInVar < data.single.bracket4.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.single.bracket3.bracketTop;
+        parsedTL =
+          data.single.bracket4.prevTax + temp * data.single.bracket4.taxRate;
+      } else if (taxInVar < data.single.bracket5.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.single.bracket5.taxRate -
+          data.single.bracket5.prevTax;
+      } else if (taxInVar < data.single.bracket6.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.single.bracket6.taxRate -
+          data.single.bracket6.prevTax;
+      } else if (taxInVar < data.single.bracket7.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.single.bracket7.taxRate -
+          data.single.bracket7.prevTax;
+      } else {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.single.bracket8.taxRate -
+          data.single.bracket8.prevTax;
+      }
     } else if (standardDeduction === "Head Of Household $18,350") {
       parsedStandardDeduction = 18350;
+      let taxInVar =
+        parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction;
+      if (taxInVar < 0) {
+        setTaxableIncome(0);
+      } else if (taxInVar < data.hoh.bracket1.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL = taxInVar * data.hoh.bracket1.taxRate;
+      } else if (taxInVar < data.hoh.bracket2.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.hoh.bracket1.bracketTop;
+        parsedTL = data.hoh.bracket2.prevTax + temp * data.hoh.bracket2.taxRate;
+      } else if (taxInVar < data.hoh.bracket3.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.hoh.bracket2.bracketTop;
+        parsedTL = data.hoh.bracket3.prevTax + temp * data.hoh.bracket3.taxRate;
+      } else if (taxInVar < data.hoh.bracket4.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.hoh.bracket3.bracketTop;
+        parsedTL = data.hoh.bracket4.prevTax + temp * data.hoh.bracket4.taxRate;
+      } else if (taxInVar < data.hoh.bracket5.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.hoh.bracket5.taxRate - data.hoh.bracket5.prevTax;
+      } else if (taxInVar < data.hoh.bracket6.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.hoh.bracket6.taxRate - data.hoh.bracket6.prevTax;
+      } else if (taxInVar < data.hoh.bracket7.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.hoh.bracket7.taxRate - data.hoh.bracket7.prevTax;
+      } else {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.hoh.bracket8.taxRate - data.hoh.bracket8.prevTax;
+      }
     } else if (standardDeduction === "Married Filing Jointly $24,400") {
       parsedStandardDeduction = 24400;
+      let taxInVar =
+        parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction;
+      if (taxInVar < 0) {
+        setTaxableIncome(0);
+      } else if (taxInVar < data.mfj.bracket1.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL = taxInVar * data.mfj.bracket1.taxRate;
+      } else if (taxInVar < data.mfj.bracket2.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.mfj.bracket1.bracketTop;
+        parsedTL = data.mfj.bracket2.prevTax + temp * data.mfj.bracket2.taxRate;
+      } else if (taxInVar < data.mfj.bracket3.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.mfj.bracket2.bracketTop;
+        parsedTL = data.mfj.bracket3.prevTax + temp * data.mfj.bracket3.taxRate;
+      } else if (taxInVar < data.mfj.bracket4.bracketTop) {
+        setTaxableIncome(taxInVar);
+        let temp = taxInVar - data.mfj.bracket3.bracketTop;
+        parsedTL = data.mfj.bracket4.prevTax + temp * data.mfj.bracket4.taxRate;
+      } else if (taxInVar < data.mfj.bracket5.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.mfj.bracket5.taxRate - data.mfj.bracket5.prevTax;
+      } else if (taxInVar < data.mfj.bracket6.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.mfj.bracket6.taxRate - data.mfj.bracket6.prevTax;
+      } else if (taxInVar < data.mfj.bracket7.bracketTop) {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.mfj.bracket7.taxRate - data.mfj.bracket7.prevTax;
+      } else {
+        setTaxableIncome(taxInVar);
+        parsedTL =
+          taxInVar * data.mfj.bracket8.taxRate - data.mfj.bracket8.prevTax;
+      }
     } else {
       parsedStandardDeduction = null;
-    }
-
-    let taxInVar =
-      parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction;
-
-    let parsedTL = 0;
-    if (taxInVar < 0) {
-      setTaxableIncome(0);
-    } else if (taxInVar < data.single.bracket1.bracketTop) {
-      setTaxableIncome(taxInVar);
-      parsedTL = taxInVar * data.single.bracket1.taxRate;
-    } else if (taxInVar < data.single.bracket2.bracketTop) {
-      setTaxableIncome(taxInVar);
-      let temp = taxInVar - data.single.bracket1.bracketTop;
-      parsedTL =
-        data.single.bracket2.prevTax + temp * data.single.bracket2.taxRate;
-    } else if (taxInVar < data.single.bracket3.bracketTop) {
-      setTaxableIncome(taxInVar);
-      let temp = taxInVar - data.single.bracket2.bracketTop;
-      parsedTL =
-        data.single.bracket3.prevTax + temp * data.single.bracket3.taxRate;
-    } else if (taxInVar < data.single.bracket4.bracketTop) {
-      setTaxableIncome(taxInVar);
-      let temp = taxInVar - data.single.bracket3.bracketTop;
-      parsedTL =
-        data.single.bracket4.prevTax + temp * data.single.bracket4.taxRate;
-    } else if (taxInVar < data.single.bracket5.bracketTop) {
-      setTaxableIncome(taxInVar);
-      parsedTL =
-        taxInVar * data.single.bracket5.taxRate - data.single.bracket5.prevTax;
-    } else if (taxInVar < data.single.bracket6.bracketTop) {
-      setTaxableIncome(taxInVar);
-      parsedTL =
-        taxInVar * data.single.bracket6.taxRate - data.single.bracket6.prevTax;
-    } else if (taxInVar < data.single.bracket7.bracketTop) {
-      setTaxableIncome(taxInVar);
-      parsedTL =
-        taxInVar * data.single.bracket7.taxRate - data.single.bracket7.prevTax;
-    } else {
-      setTaxableIncome(taxInVar);
-      parsedTL =
-        taxInVar * data.single.bracket8.taxRate - data.single.bracket8.prevTax;
     }
 
     setTaxLiability(parsedTL);
@@ -225,7 +380,7 @@ const CalcTax = () => {
               <option>Single $12,200</option>
               <option>Head Of Household $18,350</option>
               <option>Married Filing Jointly $24,400</option>
-              <option>Married Filing Seperately $12,200</option>
+              {/* <option>Married Filing Seperately $12,200</option> */}
             </ReactBootStrap.Form.Control>
           </ReactBootStrap.Form.Group>
         ) : null}
