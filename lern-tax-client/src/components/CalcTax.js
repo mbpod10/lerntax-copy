@@ -103,44 +103,44 @@ const CalcTax = () => {
     },
     mfj: {
       bracket1: {
-        bracketTop: 13851,
+        bracketTop: 19401,
         taxRate: 0.1,
         prevTax: null,
       },
       bracket2: {
-        bracketTop: 52851,
+        bracketTop: 78951,
         taxRate: 0.12,
-        prevTax: 1385,
+        prevTax: 1940,
       },
       bracket3: {
-        bracketTop: 84201,
+        bracketTop: 100001,
         taxRate: 0.22,
-        prevTax: 6062,
+        prevTax: 9092,
       },
       bracket4: {
-        bracketTop: 100001,
-        taxRate: 0.24,
-        prevTax: 12968,
+        bracketTop: 168400,
+        taxRate: 0.22,
+        prevTax: 8283,
       },
       bracket5: {
-        bracketTop: 160000,
+        bracketTop: 321450,
         taxRate: 0.24,
-        prevTax: 7246,
+        prevTax: 11651,
       },
       bracket6: {
-        bracketTop: 204100,
+        bracketTop: 408200,
         taxRate: 0.32,
-        prevTax: 20102,
+        prevTax: 37367,
       },
       bracket7: {
-        bracketTop: 510300,
+        bracketTop: 612350,
         taxRate: 0.35,
-        prevTax: 26225,
+        prevTax: 49613,
       },
       bracket8: {
         bracketTop: null,
         taxRate: 0.37,
-        prevTax: 36431,
+        prevTax: 61860,
       },
     },
   };
@@ -282,15 +282,22 @@ const CalcTax = () => {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.mfj.bracket1.bracketTop;
         parsedTL = data.mfj.bracket2.prevTax + temp * data.mfj.bracket2.taxRate;
-      } else if (taxInVar < data.mfj.bracket3.bracketTop) {
+      }
+      ///need to change the following calculation
+      else if (taxInVar < data.mfj.bracket3.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.mfj.bracket2.bracketTop;
         parsedTL = data.mfj.bracket3.prevTax + temp * data.mfj.bracket3.taxRate;
+
+        /// this needs to be changed
       } else if (taxInVar < data.mfj.bracket4.bracketTop) {
         setTaxableIncome(taxInVar);
-        let temp = taxInVar - data.mfj.bracket3.bracketTop;
-        parsedTL = data.mfj.bracket4.prevTax + temp * data.mfj.bracket4.taxRate;
-      } else if (taxInVar < data.mfj.bracket5.bracketTop) {
+        //let temp = taxInVar - data.mfj.bracket3.bracketTop;
+        parsedTL =
+          taxInVar * data.mfj.bracket4.taxRate - data.mfj.bracket4.prevTax;
+      }
+      ///this one too i think ^^
+      else if (taxInVar < data.mfj.bracket5.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.mfj.bracket5.taxRate - data.mfj.bracket5.prevTax;
