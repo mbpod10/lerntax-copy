@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as ReactBootStrap from "react-bootstrap";
+import DependentCards from "./DependentCards";
 
 const Dependents = () => {
   const [error, setError] = useState(null);
@@ -11,6 +12,7 @@ const Dependents = () => {
   const [residency, setResidency] = useState(null);
   const [support, setSupport] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [explaination, setExplaination] = useState(null);
 
   const handleChange1 = (event) => {
     if (event.target.value === "false") {
@@ -19,6 +21,7 @@ const Dependents = () => {
         "You Cannot Claim A Dependent If You Are Claimable As A Dependent"
       );
       setSuccess(null);
+      setExplaination(null);
     } else if (event.target.value === "true") {
       setDependentBool(true);
       setError(null);
@@ -30,6 +33,7 @@ const Dependents = () => {
       setError(
         "You Cannot Claim A Dependent If They Filing As Married Filing Jointly"
       );
+      setExplaination(null);
       setSuccess(null);
     } else if (event.target.value === "true") {
       setMFJBool(true);
@@ -45,6 +49,7 @@ const Dependents = () => {
       setCitizen(false);
       setError("You Cannot Claim Someone Who is Not A US Citizen");
       setSuccess(null);
+      setExplaination(null);
     }
   };
   const handleChange4 = (event) => {
@@ -55,6 +60,7 @@ const Dependents = () => {
       setRelationship(false);
       setError("You Cannot Claim Someone Who is Not One Of The Preceeding");
       setSuccess(null);
+      setExplaination(null);
     }
   };
   const handleChange5 = (event) => {
@@ -64,9 +70,10 @@ const Dependents = () => {
     } else if (event.target.value === "false") {
       setAge(false);
       setError(
-        "You Cannot Claim Someone Who is older than 17 and Not A Full-Time College Student"
+        "You Cannot Claim Someone Who is older than 17 and Not A Full-Time College Student Over The Age Of 24"
       );
       setSuccess(null);
+      setExplaination(null);
     }
   };
 
@@ -80,6 +87,7 @@ const Dependents = () => {
         "You Cannot Claim A Child Who Did Not Live With Taxpayer For More Than Half The Year "
       );
       setSuccess(null);
+      setExplaination(null);
     }
   };
 
@@ -93,6 +101,7 @@ const Dependents = () => {
         "You Cannot Claim A Child Who Provided More Than Half Their Support "
       );
       setSuccess(null);
+      setExplaination(null);
     }
   };
 
@@ -113,10 +122,15 @@ const Dependents = () => {
     }
   };
 
+  const explainDep = () => {
+    setExplaination(
+      "Depending On The Age Of Your Dependent, You May Qualify As Head Of Household If You Are Not Married. If The Dependent Is Less Than 17 Years Old And Is Your Child, You May Take A $2,000 Child Tax Credit Regardless Of Filing Status. Credits Are Directly Subtracted From Your Tax Liability. In Other Words, If You Owed $5,000 In Federal Income Tax, The CTC (Child Tax Credit) Would Reduce Your Liability To $3,000."
+    );
+  };
+
   return (
     <>
       <h1>Dependents</h1>
-
       <p>
         Determining whether you have a qualifying dependent can be pretty tricky
         in some cases, and it is certainly worth finding out. Not only can you
@@ -128,17 +142,28 @@ const Dependents = () => {
         taking these credits as the IRS is very unforgiving when it comes to tax
         fraud!
       </p>
+      {/* <p>
+        "Depending On The Age Of Your Dependent, You May Qualify As Head Of
+        Household If You Are Not Married. If The Dependent Is Less Than 17 Years
+        Old And Is Your Child, You May Take A $2,000 Child Tax Credit Regardless
+        Of Filing Status. The Way Credits Work, Is That They Are Directly
+        Subtracted From Your Tax Liability. In Other Words, If You Owed $5,000
+        In Federal Income Tax, The Credit Would Reduce Your Liability To $3,000.
+        There Are Other Credits As Well Such As The Addiitonal Child Tax Credit
+        If Your Tax Credit Exceeds Your Tax Liability (Must Qualify)"
+      </p> */}
+      <DependentCards />
       <h3>
         Let's Follow The Prompts To See If You Have A Qualifying Dependent{" "}
       </h3>
-      <div className="form-div">
+      <div className="">
         <ReactBootStrap.Form onSubmit={handleSubmit}>
           <ReactBootStrap.Form.Group
             as={ReactBootStrap.Col}
             controlId="formGridState"
           >
             <ReactBootStrap.Form.Label>
-              Are You Not Claimable As A Dependent
+              You Are Not Claimable As A Dependent
             </ReactBootStrap.Form.Label>
             <ReactBootStrap.Form.Control
               as="select"
@@ -150,7 +175,8 @@ const Dependents = () => {
               <option> </option>
               <option>true</option>
               <option>false</option>
-            </ReactBootStrap.Form.Control>
+            </ReactBootStrap.Form.Control>{" "}
+            <br />
             {dependentBool ? (
               <>
                 <ReactBootStrap.Form.Label>
@@ -166,7 +192,8 @@ const Dependents = () => {
                   <option> </option>
                   <option>true</option>
                   <option>false</option>
-                </ReactBootStrap.Form.Control>
+                </ReactBootStrap.Form.Control>{" "}
+                <br />
               </>
             ) : null}
             {dependentBool && MFJBool ? (
@@ -184,7 +211,8 @@ const Dependents = () => {
                   <option> </option>
                   <option>true</option>
                   <option>false</option>
-                </ReactBootStrap.Form.Control>
+                </ReactBootStrap.Form.Control>{" "}
+                <br />
               </>
             ) : null}
             {dependentBool && MFJBool && citizen ? (
@@ -204,7 +232,8 @@ const Dependents = () => {
                   <option> </option>
                   <option>true</option>
                   <option>false</option>
-                </ReactBootStrap.Form.Control>
+                </ReactBootStrap.Form.Control>{" "}
+                <br />
               </>
             ) : null}
             {dependentBool && MFJBool && citizen && relationship ? (
@@ -224,7 +253,8 @@ const Dependents = () => {
                   <option> </option>
                   <option>true</option>
                   <option>false</option>
-                </ReactBootStrap.Form.Control>
+                </ReactBootStrap.Form.Control>{" "}
+                <br />
               </>
             ) : null}
             {dependentBool && MFJBool && citizen && relationship && age ? (
@@ -245,9 +275,9 @@ const Dependents = () => {
                   <option>true</option>
                   <option>false</option>
                 </ReactBootStrap.Form.Control>{" "}
+                <br />
               </>
             ) : null}
-
             {dependentBool &&
             MFJBool &&
             citizen &&
@@ -269,7 +299,8 @@ const Dependents = () => {
                   <option> </option>
                   <option>true</option>
                   <option>false</option>
-                </ReactBootStrap.Form.Control>
+                </ReactBootStrap.Form.Control>{" "}
+                <br />
                 <ReactBootStrap.Form.Text className="text-muted">
                   <ReactBootStrap.ListGroup>
                     <ReactBootStrap.ListGroup.Item variant="success">
@@ -293,21 +324,32 @@ const Dependents = () => {
             <>
               <ReactBootStrap.Button variant="primary" type="submit">
                 Submit
-              </ReactBootStrap.Button>
+              </ReactBootStrap.Button>{" "}
             </>
           ) : null}{" "}
-          <br />
-        </ReactBootStrap.Form>
+        </ReactBootStrap.Form>{" "}
+        <br />
         {success ? (
           <>
             <ReactBootStrap.ListGroup>
               <ReactBootStrap.ListGroup.Item variant="success">
-                {success}
+                {success}{" "}
+                <span onClick={() => explainDep()}>What Does This Mean?</span>
               </ReactBootStrap.ListGroup.Item>
             </ReactBootStrap.ListGroup>
           </>
         ) : null}
-      </div>
+      </div>{" "}
+      <br />
+      {explaination ? (
+        <>
+          <ReactBootStrap.ListGroup>
+            <ReactBootStrap.ListGroup.Item variant="success">
+              {explaination}
+            </ReactBootStrap.ListGroup.Item>
+          </ReactBootStrap.ListGroup>
+        </>
+      ) : null}
       {error ? (
         <ReactBootStrap.ListGroup>
           <ReactBootStrap.ListGroup.Item variant="danger">
