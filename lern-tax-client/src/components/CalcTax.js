@@ -9,6 +9,57 @@ const CalcTax = () => {
   const [adjustments, setAdjustments] = useState(null);
   const [standardDeduction, setStandardDeduction] = useState("");
   const [taxableIncome, setTaxableIncome] = useState(null);
+  const [taxLiability, setTaxLiability] = useState(null);
+
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const data = {
+    single: {
+      bracket1: {
+        bracketTop: 9701,
+        taxRate: 0.1,
+        prevTax: null,
+      },
+      bracket2: {
+        bracketTop: 39476,
+        taxRate: 0.12,
+        prevTax: 970,
+      },
+      bracket3: {
+        bracketTop: 84201,
+        taxRate: 0.22,
+        prevTax: 4543,
+      },
+      bracket4: {
+        bracketTop: 100001,
+        taxRate: 0.24,
+        prevTax: 14383,
+      },
+      bracket5: {
+        bracketTop: 160725,
+        taxRate: 0.24,
+        prevTax: 5826,
+      },
+      bracket6: {
+        bracketTop: 204100,
+        taxRate: 0.32,
+        prevTax: 18684,
+      },
+      bracket7: {
+        bracketTop: 510300,
+        taxRate: 0.35,
+        prevTax: 24807,
+      },
+      bracket8: {
+        bracketTop: null,
+        taxRate: 0.37,
+        prevTax: 35013,
+      },
+    },
+  };
 
   const handleChange1 = (event) => {
     if (isNaN(event.target.value)) {
@@ -62,11 +113,57 @@ const CalcTax = () => {
     } else {
       parsedStandardDeduction = null;
     }
-    setTaxableIncome(
-      parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction
-    );
 
-    console.log(parsedW2, parsedAdd, parseAdjustments, parsedStandardDeduction);
+    let taxInVar =
+      parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction;
+
+    let parsedTL = 0;
+    if (taxInVar < 0) {
+      setTaxableIncome(0);
+    } else if (taxInVar < data.single.bracket1.bracketTop) {
+      setTaxableIncome(taxInVar);
+      parsedTL = taxInVar * data.single.bracket1.taxRate;
+    } else if (taxInVar < data.single.bracket2.bracketTop) {
+      setTaxableIncome(taxInVar);
+      let temp = taxInVar - data.single.bracket1.bracketTop;
+      parsedTL =
+        data.single.bracket2.prevTax + temp * data.single.bracket2.taxRate;
+    } else if (taxInVar < data.single.bracket3.bracketTop) {
+      setTaxableIncome(taxInVar);
+      let temp = taxInVar - data.single.bracket2.bracketTop;
+      parsedTL =
+        data.single.bracket3.prevTax + temp * data.single.bracket3.taxRate;
+    } else if (taxInVar < data.single.bracket4.bracketTop) {
+      setTaxableIncome(taxInVar);
+      let temp = taxInVar - data.single.bracket3.bracketTop;
+      parsedTL =
+        data.single.bracket4.prevTax + temp * data.single.bracket4.taxRate;
+    } else if (taxInVar < data.single.bracket5.bracketTop) {
+      setTaxableIncome(taxInVar);
+      parsedTL =
+        taxInVar * data.single.bracket5.taxRate - data.single.bracket5.prevTax;
+    } else if (taxInVar < data.single.bracket6.bracketTop) {
+      setTaxableIncome(taxInVar);
+      parsedTL =
+        taxInVar * data.single.bracket6.taxRate - data.single.bracket6.prevTax;
+    } else if (taxInVar < data.single.bracket7.bracketTop) {
+      setTaxableIncome(taxInVar);
+      parsedTL =
+        taxInVar * data.single.bracket7.taxRate - data.single.bracket7.prevTax;
+    } else {
+      setTaxableIncome(taxInVar);
+      parsedTL =
+        taxInVar * data.single.bracket8.taxRate - data.single.bracket8.prevTax;
+    }
+
+    setTaxLiability(parsedTL);
+    console.log(
+      parsedW2,
+      parsedAdd,
+      parseAdjustments,
+      parsedStandardDeduction,
+      taxLiability
+    );
   };
 
   return (
@@ -132,11 +229,35 @@ const CalcTax = () => {
             </ReactBootStrap.Form.Control>
           </ReactBootStrap.Form.Group>
         ) : null}
+
         <ReactBootStrap.Button variant="primary" type="submit">
           Calculate
         </ReactBootStrap.Button>
       </ReactBootStrap.Form>
-      {error} {taxableIncome}
+      <br />
+      {taxableIncome ? (
+        <>
+          <ReactBootStrap.ListGroup>
+            <ReactBootStrap.ListGroup.Item variant="success">
+              Taxable Income: {formatter.format(taxableIncome)}
+            </ReactBootStrap.ListGroup.Item>
+          </ReactBootStrap.ListGroup>
+          <br />
+          <ReactBootStrap.ListGroup>
+            <ReactBootStrap.ListGroup.Item variant="danger">
+              Tax Liability: {formatter.format(Math.ceil(taxLiability))}
+            </ReactBootStrap.ListGroup.Item>
+          </ReactBootStrap.ListGroup>
+        </>
+      ) : null}
+
+      {error ? (
+        <ReactBootStrap.ListGroup>
+          <ReactBootStrap.ListGroup.Item variant="danger">
+            {error}
+          </ReactBootStrap.ListGroup.Item>
+        </ReactBootStrap.ListGroup>
+      ) : null}
     </div>
   );
 };
