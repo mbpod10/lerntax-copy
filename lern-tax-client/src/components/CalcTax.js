@@ -329,98 +329,119 @@ const CalcTax = () => {
   };
 
   return (
-    <div className="form-div">
-      <h1>Progress Through The Forms</h1>
-      <ReactBootStrap.Form onSubmit={handleSubmit}>
-        <ReactBootStrap.Form.Group controlId="formBasicEmail">
-          <ReactBootStrap.Form.Label>W2 Income</ReactBootStrap.Form.Label>
-          <ReactBootStrap.Form.Control
-            value={w2Income}
-            name="income"
-            onChange={handleChange1}
-            required
-          />
-        </ReactBootStrap.Form.Group>
-        {w2Income ? (
+    <>
+      <p>
+        Note: Calculations May Be Off By As Much As $7 For Taxable Incomes Less
+        Than $100K
+      </p>
+      <div className="form-div">
+        <h1>Tax Calculator</h1>
+
+        <ReactBootStrap.Form onSubmit={handleSubmit}>
           <ReactBootStrap.Form.Group controlId="formBasicEmail">
-            <ReactBootStrap.Form.Label>
-              Additional Income
-            </ReactBootStrap.Form.Label>
+            <ReactBootStrap.Form.Label>W2 Income</ReactBootStrap.Form.Label>
             <ReactBootStrap.Form.Control
-              value={addIncome}
-              name="adittional income"
-              onChange={handleChange2}
+              value={w2Income}
+              name="income"
+              onChange={handleChange1}
               required
             />
           </ReactBootStrap.Form.Group>
-        ) : null}
-        {addIncome ? (
-          <ReactBootStrap.Form.Group controlId="formBasicEmail">
-            <ReactBootStrap.Form.Label>
-              Additional Income
-            </ReactBootStrap.Form.Label>
-            <ReactBootStrap.Form.Control
-              value={adjustments}
-              name="adittional income"
-              onChange={handleChange3}
-              required
-            />
-          </ReactBootStrap.Form.Group>
-        ) : null}
-        {adjustments ? (
-          <ReactBootStrap.Form.Group
-            as={ReactBootStrap.Col}
-            controlId="formGridState"
-          >
-            <ReactBootStrap.Form.Label>
-              Standard Deduction
-            </ReactBootStrap.Form.Label>
-            <ReactBootStrap.Form.Control
-              as="select"
-              defaultValue=""
-              value={standardDeduction}
-              name="marital_status"
-              onChange={handleChange4}
-              // required
-            >
-              <option></option>
-              <option>Single $12,200</option>
-              <option>Head Of Household $18,350</option>
-              <option>Married Filing Jointly $24,400</option>
-              {/* <option>Married Filing Seperately $12,200</option> */}
-            </ReactBootStrap.Form.Control>
-          </ReactBootStrap.Form.Group>
+          {w2Income ? (
+            <>
+              {" "}
+              <b>+</b> <br />
+              <ReactBootStrap.Form.Group controlId="formBasicEmail">
+                <ReactBootStrap.Form.Label>
+                  Additional Income
+                </ReactBootStrap.Form.Label>
+                <ReactBootStrap.Form.Control
+                  value={addIncome}
+                  name="adittional income"
+                  onChange={handleChange2}
+                  required
+                />
+              </ReactBootStrap.Form.Group>
+            </>
+          ) : null}
+          {addIncome ? (
+            <>
+              {" "}
+              <b>-</b> <br />
+              <ReactBootStrap.Form.Group controlId="formBasicEmail">
+                <ReactBootStrap.Form.Label>
+                  Income Adjustments
+                </ReactBootStrap.Form.Label>
+                <ReactBootStrap.Form.Control
+                  value={adjustments}
+                  name="adittional income"
+                  onChange={handleChange3}
+                  required
+                />
+              </ReactBootStrap.Form.Group>{" "}
+            </>
+          ) : null}
+          {adjustments ? (
+            <>
+              {" "}
+              <b>-</b> <br />
+              <ReactBootStrap.Form.Group
+                as={ReactBootStrap.Col}
+                controlId="formGridState"
+              >
+                <ReactBootStrap.Form.Label>
+                  Standard Deduction
+                </ReactBootStrap.Form.Label>
+                <ReactBootStrap.Form.Control
+                  as="select"
+                  defaultValue=""
+                  value={standardDeduction}
+                  name="marital_status"
+                  onChange={handleChange4}
+                  // required
+                >
+                  <option></option>
+                  <option>Single $12,200</option>
+                  <option>Head Of Household $18,350</option>
+                  <option>Married Filing Jointly $24,400</option>
+                  {/* <option>Married Filing Seperately $12,200</option> */}
+                </ReactBootStrap.Form.Control>
+              </ReactBootStrap.Form.Group>
+            </>
+          ) : null}
+
+          {standardDeduction ? (
+            <ReactBootStrap.Button variant="primary" type="submit">
+              Calculate
+            </ReactBootStrap.Button>
+          ) : null}
+        </ReactBootStrap.Form>
+        <br />
+        {taxableIncome ? (
+          <>
+            <ReactBootStrap.ListGroup>
+              <ReactBootStrap.ListGroup.Item variant="success">
+                Taxable Income: {formatter.format(taxableIncome)}
+              </ReactBootStrap.ListGroup.Item>
+            </ReactBootStrap.ListGroup>
+            <br />
+            <ReactBootStrap.ListGroup>
+              <ReactBootStrap.ListGroup.Item variant="danger">
+                Tax Liability: {formatter.format(Math.ceil(taxLiability))}
+              </ReactBootStrap.ListGroup.Item>
+            </ReactBootStrap.ListGroup>
+          </>
         ) : null}
 
-        <ReactBootStrap.Button variant="primary" type="submit">
-          Calculate
-        </ReactBootStrap.Button>
-      </ReactBootStrap.Form>
-      <br />
-      {taxableIncome ? (
-        <>
-          <ReactBootStrap.ListGroup>
-            <ReactBootStrap.ListGroup.Item variant="success">
-              Taxable Income: {formatter.format(taxableIncome)}
-            </ReactBootStrap.ListGroup.Item>
-          </ReactBootStrap.ListGroup>
-          <br />
+        {error ? (
           <ReactBootStrap.ListGroup>
             <ReactBootStrap.ListGroup.Item variant="danger">
-              Tax Liability: {formatter.format(Math.ceil(taxLiability))}
+              {error}
             </ReactBootStrap.ListGroup.Item>
           </ReactBootStrap.ListGroup>
-        </>
-      ) : null}
-
-      {error ? (
-        <ReactBootStrap.ListGroup>
-          <ReactBootStrap.ListGroup.Item variant="danger">
-            {error}
-          </ReactBootStrap.ListGroup.Item>
-        </ReactBootStrap.ListGroup>
-      ) : null}
-    </div>
+        ) : null}
+      </div>
+    </>
   );
 };
 

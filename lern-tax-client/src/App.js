@@ -17,6 +17,8 @@ import ItemizedDeductions from "./statics/ItemizedDeductions";
 import StandardDeductions from "./statics/StandardDeduction";
 import CalcTax from "./components/CalcTax";
 import TaxInfo from "./components/TaxInfo";
+import Dependents from "./components/Dependents";
+import Footer from "./components/Footer";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
@@ -72,7 +74,7 @@ function App() {
 
   return (
     <div className="App">
-      <ReactBootStrap.Jumbotron fluid>
+      <ReactBootStrap.Jumbotron fluid className="header">
         <ReactBootStrap.Container>
           <h1>Lern Tax</h1>
           <p>Where We Make Taxes Easy To Understand</p>
@@ -100,6 +102,9 @@ function App() {
             </Link>
             <Link className="nav-link" to="/calc-tax">
               Calc
+            </Link>
+            <Link className="nav-link" to="/dependents">
+              Dependents
             </Link>
             {loggedIn === "LOGGED_IN" ? (
               <>
@@ -238,7 +243,12 @@ function App() {
             <Route path="/adjustable-gross-income" component={AGI} />
             <Route path="/itemized-deductions" component={ItemizedDeductions} />
             <Route path="/standard-deduction" component={StandardDeductions} />
+            <Route path="/dependents" component={Dependents} />
           </main>
+
+          <footer>
+            <Footer />
+          </footer>
         </React.Fragment>
       </Switch>
     </div>
