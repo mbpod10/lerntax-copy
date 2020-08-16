@@ -45,7 +45,7 @@ const About = (props) => {
               We know the IRS tax code is larger than the Bible, the Koran, and
               the Torah combined, but don't fear! We are here to explain tax
               laws as simply as possible. Though the dynamics of tax law is
-              constantly changing, Lern tax is your one stop shop to explain the
+              constantly changing, LernTax is your one stop shop to explain the
               basics. If we can teach one person one new thing about taxes then
               we have completed our mission!
             </p>

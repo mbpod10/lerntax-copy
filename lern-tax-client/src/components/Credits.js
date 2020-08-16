@@ -95,8 +95,8 @@ const Credits = () => {
               <h5>Nonrefundable Credits</h5>
               <p>
                 Nonrefundable credits simply mean that combined value of credits
-                cannot reduce a taxpayer's tax liabilty below 0. Examples of
-                such credits includeL Saver's credit, Lifetime learning credit
+                cannot reduce a taxpayer's tax liabilty below $0. Examples of
+                such credits include Saver's credit, Lifetime learning credit
                 (LLC), Adoption credit Child, dependent care credit, Foreign tax
                 credit (FTC), Elderly and disabled credit, Residential energy
                 efficient property credit, and the Child tax credit.
@@ -106,7 +106,7 @@ const Credits = () => {
                 Sheryl is a single mother with two 12 year old daughters who are
                 qualifying dependents for the Child Tax Credit. Sheryl has an
                 AGI of $24,000 during the year. She will file as Head of
-                Household becuase of her qualifying children. The HOH filing
+                Household because of her qualifying children. The HOH filing
                 STANDARD DEDUCTION is $18,350 in 2020. This deduction reduces
                 Sheryl's <i>taxable income </i> to $5,650. Thus leaving her with
                 a tax liability of $568 according to IRS tax tables. Because
@@ -114,7 +114,7 @@ const Credits = () => {
                 <i>TAX LIABILITY</i> dollar for dollar. Sheryl would normally be
                 able to take a credit of $4,000 for the CTC, however her tax
                 liabilty is only $568. Because the CTC is nonrefundable, her tax
-                liability can only go to 0. HOWEVER based on her tax situation,
+                liability can only go to $0. HOWEVER based on her tax situation,
                 she may qualify for additional refundable credits. See below.
               </p>
               <ReactBootStrap.Container className="example-con">
@@ -149,7 +149,7 @@ const Credits = () => {
                 taxpayer’s situation. Sometimes, a taxpayer may end up with a
                 negative federal income tax for the year.{" "}
                 <i>
-                  Note: Child Tax Credit and Addiitonal Child Tax Credit are two
+                  Note: Child Tax Credit and Additonal Child Tax Credit are two
                   different tax credits.
                 </i>
               </p>
@@ -194,6 +194,13 @@ const Credits = () => {
                 <ReactBootStrap.Row>
                   <ReactBootStrap.Col sm>
                     ACTC $2,800 + Withholding $1,000 = Refund $3,800
+                  </ReactBootStrap.Col>
+                </ReactBootStrap.Row>
+              </ReactBootStrap.Container>
+              <ReactBootStrap.Container>
+                <ReactBootStrap.Row>
+                  <ReactBootStrap.Col sm>
+                    Effective Tax Rate = TL: -$2,800 / TI: $5,650 = -49.56%
                   </ReactBootStrap.Col>
                 </ReactBootStrap.Row>
               </ReactBootStrap.Container>

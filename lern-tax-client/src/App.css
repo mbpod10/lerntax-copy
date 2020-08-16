@@ -97,6 +97,12 @@ body {
 .liners {
   border-color: black;
 }
+
+tr,
+td {
+  font-size: 0.25rem;
+}
+
 /* footer {
   position: absolute;
   background: white;
@@ -163,5 +169,9 @@ i {
   main {
     padding: 50px;
     text-align: center;
+  }
+  tr,
+  td {
+    font-size: 1rem;
   }
 }

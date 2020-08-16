@@ -276,8 +276,7 @@ const Dependents = () => {
             residency ? (
               <>
                 <ReactBootStrap.Form.Label>
-                  The Child Lived Did Not Provide More Than Half Of Their
-                  Support
+                  The Child Did Not Provide More Than Half Of Their Own Support
                 </ReactBootStrap.Form.Label>
                 <ReactBootStrap.Form.Control
                   as="select"

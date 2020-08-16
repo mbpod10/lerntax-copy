@@ -20,6 +20,7 @@ import TaxInfo from "./components/TaxInfo";
 import Dependents from "./components/Dependents";
 import Footer from "./components/Footer";
 import Credits from "./components/Credits";
+import TaxRates from "./components/TaxRates";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
@@ -77,7 +78,7 @@ function App() {
     <div className="App">
       <ReactBootStrap.Jumbotron fluid className="header">
         <ReactBootStrap.Container>
-          <h1>Lern Tax</h1>
+          <h1>LernTax</h1>
           <p>Where We Make Taxes Easy To Understand</p>
         </ReactBootStrap.Container>
       </ReactBootStrap.Jumbotron>
@@ -109,6 +110,9 @@ function App() {
             </Link>
             <Link className="nav-link" to="/credits">
               Credits
+            </Link>
+            <Link className="nav-link" to="/tax-rates">
+              Tax Rates
             </Link>
             {loggedIn === "LOGGED_IN" ? (
               <>
@@ -249,6 +253,7 @@ function App() {
             <Route path="/standard-deduction" component={StandardDeductions} />
             <Route path="/dependents" component={Dependents} />
             <Route path="/credits" component={Credits} />
+            <Route path="/tax-rates" component={TaxRates} />
           </main>
 
           <footer>
