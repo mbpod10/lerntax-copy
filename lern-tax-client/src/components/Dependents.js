@@ -124,7 +124,7 @@ const Dependents = () => {
 
   const explainDep = () => {
     setExplaination(
-      "Depending On The Age Of Your Dependent, You May Qualify As Head Of Household If You Are Not Married. If The Dependent Is Less Than 17 Years Old And Is Your Child, You May Take A $2,000 Child Tax Credit Regardless Of Filing Status. Credits Are Directly Subtracted From Your Tax Liability. In Other Words, If You Owed $5,000 In Federal Income Tax, The CTC (Child Tax Credit) Would Reduce Your Liability To $3,000."
+      "Depending On The Age Of Your Dependent, You May Qualify As Head Of Household If You Are Not Married. If The Dependent Is Less Than 17 Years Old And Is Your Child, You May Take A $2,000 Child Tax Credit Regardless Of Filing Status. If The Qualifying Relative Is Under The Age of 24 And A Full Time Student, You May Take A $500 Credit. Credits Are Directly Subtracted From Your Tax Liability. In Other Words, If You Owed $5,000 In Federal Income Tax, The CTC (Child Tax Credit) Would Reduce Your Liability To $3,000."
     );
   };
 
@@ -142,21 +142,11 @@ const Dependents = () => {
         taking these credits as the IRS is very unforgiving when it comes to tax
         fraud!
       </p>
-      {/* <p>
-        "Depending On The Age Of Your Dependent, You May Qualify As Head Of
-        Household If You Are Not Married. If The Dependent Is Less Than 17 Years
-        Old And Is Your Child, You May Take A $2,000 Child Tax Credit Regardless
-        Of Filing Status. The Way Credits Work, Is That They Are Directly
-        Subtracted From Your Tax Liability. In Other Words, If You Owed $5,000
-        In Federal Income Tax, The Credit Would Reduce Your Liability To $3,000.
-        There Are Other Credits As Well Such As The Addiitonal Child Tax Credit
-        If Your Tax Credit Exceeds Your Tax Liability (Must Qualify)"
-      </p> */}
       <DependentCards />
       <h3>
         Let's Follow The Prompts To See If You Have A Qualifying Dependent{" "}
       </h3>
-      <div className="">
+      <div className="lern-tax-about">
         <ReactBootStrap.Form onSubmit={handleSubmit}>
           <ReactBootStrap.Form.Group
             as={ReactBootStrap.Col}

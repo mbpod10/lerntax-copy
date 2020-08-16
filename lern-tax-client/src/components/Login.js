@@ -77,7 +77,7 @@ const Login = (props) => {
           <br />
           <h5>Don't Have An Account?</h5>
           <h5>
-            Register <Link to="/">Here</Link>
+            Register <Link to="/about">Here</Link>
           </h5>
         </div>
       )}

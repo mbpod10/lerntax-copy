@@ -85,7 +85,7 @@ const Home = (props) => {
     <>
       {props.email ? <h5>{props.email} </h5> : null}
       <h4>Status: {props.loggedInStatus}</h4>
-      <h1>Home</h1>
+      <h1>Register</h1>
       {props.loggedInStatus === "LOGGED_IN" ? null : (
         <div className="form-div">
           <Registration

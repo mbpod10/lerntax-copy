@@ -29,14 +29,14 @@
 }
 
 .form-div {
-  margin: auto;
-  width: 50%;
+  /* margin: auto; */
+  width: 100%;
   text-align: center;
   border-color: grey 1px;
 }
 .form-div2 {
-  margin: auto;
-  width: 75%;
+  /* margin: auto; */
+  width: 100%;
   text-align: center;
 }
 
@@ -44,7 +44,7 @@
   color: white;
 }
 main {
-  padding: 50px;
+  padding: 10px;
   text-align: center;
 }
 .table {
@@ -77,6 +77,14 @@ body {
   /* background: radial-gradient(600px at 50% 50%, #fff 20%, #000 100%); */
   background-color: darkgray;
 }
+.lern-tax-about {
+  border: solid black 1px;
+  padding-top: 10px;
+}
+.example {
+  border: solid yellow 2px;
+  margin-bottom: 5px;
+}
 
 .header {
   margin-bottom: 0;
@@ -86,6 +94,9 @@ body {
     rgba(0, 0, 0, 0.959) 100%
   );
 }
+.liners {
+  border-color: black;
+}
 /* footer {
   position: absolute;
   background: white;
@@ -93,12 +104,20 @@ body {
   width: 100%;
   height: 2rem;
 } */
+.footer {
+  border-top: black 2px;
+}
 span {
   color: blue;
 }
 span:hover {
   color: red;
   cursor: pointer;
+  margin-left: 0.25rem;
+}
+i {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
 }
 .dependent-cards {
   display: flex;
@@ -123,5 +142,26 @@ span:hover {
   .dependent-cards {
     flex-direction: column;
     margin-bottom: 1rem;
+  }
+  .footer {
+    border-top: black 2px;
+  }
+  .lines {
+    border-color: black 1px;
+  }
+  .form-div {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    border-color: grey 1px;
+  }
+  .form-div2 {
+    margin: auto;
+    width: 75%;
+    text-align: center;
+  }
+  main {
+    padding: 50px;
+    text-align: center;
   }
 }

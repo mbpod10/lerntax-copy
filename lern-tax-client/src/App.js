@@ -19,6 +19,7 @@ import CalcTax from "./components/CalcTax";
 import TaxInfo from "./components/TaxInfo";
 import Dependents from "./components/Dependents";
 import Footer from "./components/Footer";
+import Credits from "./components/Credits";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState("NOT_LOGGED_IN");
@@ -91,20 +92,23 @@ function App() {
         <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
           <ReactBootStrap.Nav className="mr-auto">
-            <Link className="nav-link" to="/">
+            {/* <Link className="nav-link" to="/">
               Home
-            </Link>
-            <Link className="nav-link" to="/about">
+            </Link> */}
+            <Link className="nav-link" to="/">
               LernTax
             </Link>
             <Link className="nav-link" to="/tax-basics">
               Tax Basics
             </Link>
             <Link className="nav-link" to="/calc-tax">
-              Calc
+              TaxCalc
             </Link>
             <Link className="nav-link" to="/dependents">
               Dependents
+            </Link>
+            <Link className="nav-link" to="/credits">
+              Credits
             </Link>
             {loggedIn === "LOGGED_IN" ? (
               <>
@@ -147,7 +151,7 @@ function App() {
               exact
               path="/"
               render={(props) => (
-                <Home
+                <About
                   {...props}
                   email={email}
                   user={user}
@@ -211,7 +215,7 @@ function App() {
             <Route
               path="/about"
               render={(props) => (
-                <About
+                <Home
                   {...props}
                   user={user}
                   email={email}
@@ -244,6 +248,7 @@ function App() {
             <Route path="/itemized-deductions" component={ItemizedDeductions} />
             <Route path="/standard-deduction" component={StandardDeductions} />
             <Route path="/dependents" component={Dependents} />
+            <Route path="/credits" component={Credits} />
           </main>
 
           <footer>

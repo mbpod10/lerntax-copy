@@ -10,6 +10,8 @@ const CalcTax = () => {
   const [standardDeduction, setStandardDeduction] = useState("");
   const [taxableIncome, setTaxableIncome] = useState(null);
   const [taxLiability, setTaxLiability] = useState(null);
+  const [effectiveRate, setEffectiveRate] = useState(null);
+  const [marginalRate, setMarginalRate] = useState(null);
 
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -186,6 +188,7 @@ const CalcTax = () => {
     const parseAdjustments = parseInt(adjustments, 10);
     let parsedStandardDeduction = 0;
     let parsedTL = 0;
+
     if (standardDeduction === "Single $12,200") {
       parsedStandardDeduction = 12200;
       let taxInVar =
@@ -195,79 +198,112 @@ const CalcTax = () => {
       } else if (taxInVar < data.single.bracket1.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL = taxInVar * data.single.bracket1.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket1.taxRate * 100}%`);
       } else if (taxInVar < data.single.bracket2.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.single.bracket1.bracketTop;
         parsedTL =
           data.single.bracket2.prevTax + temp * data.single.bracket2.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket2.taxRate * 100}%`);
       } else if (taxInVar < data.single.bracket3.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.single.bracket2.bracketTop;
         parsedTL =
           data.single.bracket3.prevTax + temp * data.single.bracket3.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket3.taxRate * 100}%`);
       } else if (taxInVar < data.single.bracket4.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.single.bracket3.bracketTop;
         parsedTL =
           data.single.bracket4.prevTax + temp * data.single.bracket4.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket4.taxRate * 100}%`);
       } else if (taxInVar < data.single.bracket5.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.single.bracket5.taxRate -
           data.single.bracket5.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket5.taxRate * 100}%`);
       } else if (taxInVar < data.single.bracket6.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.single.bracket6.taxRate -
           data.single.bracket6.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket6.taxRate * 100}%`);
       } else if (taxInVar < data.single.bracket7.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.single.bracket7.taxRate -
           data.single.bracket7.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket7.taxRate * 100}%`);
       } else {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.single.bracket8.taxRate -
           data.single.bracket8.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.single.bracket8.taxRate * 100}%`);
       }
     } else if (standardDeduction === "Head Of Household $18,350") {
       parsedStandardDeduction = 18350;
       let taxInVar =
         parsedW2 + parsedAdd - parseAdjustments - parsedStandardDeduction;
+
       if (taxInVar < 0) {
         setTaxableIncome(0);
       } else if (taxInVar < data.hoh.bracket1.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL = taxInVar * data.hoh.bracket1.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket1.taxRate * 100}%`);
       } else if (taxInVar < data.hoh.bracket2.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.hoh.bracket1.bracketTop;
         parsedTL = data.hoh.bracket2.prevTax + temp * data.hoh.bracket2.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket2.taxRate * 100}%`);
       } else if (taxInVar < data.hoh.bracket3.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.hoh.bracket2.bracketTop;
         parsedTL = data.hoh.bracket3.prevTax + temp * data.hoh.bracket3.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket3.taxRate * 100}%`);
       } else if (taxInVar < data.hoh.bracket4.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.hoh.bracket3.bracketTop;
         parsedTL = data.hoh.bracket4.prevTax + temp * data.hoh.bracket4.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket4.taxRate * 100}%`);
       } else if (taxInVar < data.hoh.bracket5.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.hoh.bracket5.taxRate - data.hoh.bracket5.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket5.taxRate * 100}%`);
       } else if (taxInVar < data.hoh.bracket6.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.hoh.bracket6.taxRate - data.hoh.bracket6.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket6.taxRate * 100}%`);
       } else if (taxInVar < data.hoh.bracket7.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.hoh.bracket7.taxRate - data.hoh.bracket7.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket7.taxRate * 100}%`);
       } else {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.hoh.bracket8.taxRate - data.hoh.bracket8.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.hoh.bracket8.taxRate * 100}%`);
       }
     } else if (standardDeduction === "Married Filing Jointly $24,400") {
       parsedStandardDeduction = 24400;
@@ -278,54 +314,56 @@ const CalcTax = () => {
       } else if (taxInVar < data.mfj.bracket1.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL = taxInVar * data.mfj.bracket1.taxRate;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket1.taxRate * 100}%`);
       } else if (taxInVar < data.mfj.bracket2.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.mfj.bracket1.bracketTop;
         parsedTL = data.mfj.bracket2.prevTax + temp * data.mfj.bracket2.taxRate;
-      }
-      ///need to change the following calculation
-      else if (taxInVar < data.mfj.bracket3.bracketTop) {
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket2.taxRate * 100}%`);
+      } else if (taxInVar < data.mfj.bracket3.bracketTop) {
         setTaxableIncome(taxInVar);
         let temp = taxInVar - data.mfj.bracket2.bracketTop;
         parsedTL = data.mfj.bracket3.prevTax + temp * data.mfj.bracket3.taxRate;
-
-        /// this needs to be changed
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket3.taxRate * 100}%`);
       } else if (taxInVar < data.mfj.bracket4.bracketTop) {
         setTaxableIncome(taxInVar);
-        //let temp = taxInVar - data.mfj.bracket3.bracketTop;
         parsedTL =
           taxInVar * data.mfj.bracket4.taxRate - data.mfj.bracket4.prevTax;
-      }
-      ///this one too i think ^^
-      else if (taxInVar < data.mfj.bracket5.bracketTop) {
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket4.taxRate * 100}%`);
+      } else if (taxInVar < data.mfj.bracket5.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.mfj.bracket5.taxRate - data.mfj.bracket5.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket5.taxRate * 100}%`);
       } else if (taxInVar < data.mfj.bracket6.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.mfj.bracket6.taxRate - data.mfj.bracket6.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket6.taxRate * 100}%`);
       } else if (taxInVar < data.mfj.bracket7.bracketTop) {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.mfj.bracket7.taxRate - data.mfj.bracket7.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket7.taxRate * 100}%`);
       } else {
         setTaxableIncome(taxInVar);
         parsedTL =
           taxInVar * data.mfj.bracket8.taxRate - data.mfj.bracket8.prevTax;
+        setEffectiveRate(`${((parsedTL / taxInVar) * 100).toFixed(2)}%`);
+        setMarginalRate(`${data.mfj.bracket8.taxRate * 100}%`);
       }
     } else {
       parsedStandardDeduction = null;
     }
 
     setTaxLiability(parsedTL);
-    console.log(
-      parsedW2,
-      parsedAdd,
-      parseAdjustments,
-      parsedStandardDeduction,
-      taxLiability
-    );
   };
 
   return (
@@ -427,7 +465,19 @@ const CalcTax = () => {
             <br />
             <ReactBootStrap.ListGroup>
               <ReactBootStrap.ListGroup.Item variant="danger">
-                Tax Liability: {formatter.format(Math.ceil(taxLiability))}
+                Tax Liability: {formatter.format(Math.ceil(taxLiability))}{" "}
+              </ReactBootStrap.ListGroup.Item>
+            </ReactBootStrap.ListGroup>{" "}
+            <br />
+            <ReactBootStrap.ListGroup>
+              <ReactBootStrap.ListGroup.Item variant="danger">
+                Marginal Tax Rate: {marginalRate}
+              </ReactBootStrap.ListGroup.Item>
+            </ReactBootStrap.ListGroup>
+            <br />
+            <ReactBootStrap.ListGroup>
+              <ReactBootStrap.ListGroup.Item variant="danger">
+                Effective Tax Rate: {effectiveRate}
               </ReactBootStrap.ListGroup.Item>
             </ReactBootStrap.ListGroup>
           </>
