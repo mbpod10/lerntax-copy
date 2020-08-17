@@ -69,7 +69,9 @@ main {
   justify-content: center;
   /* margin: auto; */
 }
-
+p {
+  text-align: left;
+}
 .list-group2 {
   width: 25%;
 }
@@ -102,7 +104,14 @@ tr,
 td {
   font-size: 0.75rem;
 }
-
+.small-p {
+  text-align: center;
+  font-size: 1rem;
+}
+.small-p2 {
+  text-align: left;
+  font-size: 1.5rem;
+}
 /* footer {
   position: absolute;
   background: white;
@@ -177,5 +186,8 @@ i {
   .tax-steps {
     margin: auto;
     width: 75%;
+  }
+  p {
+    font-size: 1.5rem;
   }
 }

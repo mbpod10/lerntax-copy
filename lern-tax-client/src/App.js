@@ -79,7 +79,7 @@ function App() {
       <ReactBootStrap.Jumbotron fluid className="header">
         <ReactBootStrap.Container>
           <h1>LernTax</h1>
-          <p>Where We Make Taxes Easy To Understand</p>
+          <p className="small-p">Where We Make Taxes Easy To Understand</p>
         </ReactBootStrap.Container>
       </ReactBootStrap.Jumbotron>
       <ReactBootStrap.Navbar
@@ -100,10 +100,10 @@ function App() {
               LernTax
             </Link>
             <Link className="nav-link" to="/tax-basics">
-              Tax Basics
+              Basics
             </Link>
             <Link className="nav-link" to="/calc-tax">
-              TaxCalc
+              Calc
             </Link>
             <Link className="nav-link" to="/dependents">
               Dependents
@@ -112,7 +112,7 @@ function App() {
               Credits
             </Link>
             <Link className="nav-link" to="/tax-rates">
-              Tax Rates
+              Rates
             </Link>
             {loggedIn === "LOGGED_IN" ? (
               <>
@@ -200,6 +200,7 @@ function App() {
                   loggedInStatus={loggedIn}
                   handleLogin={handleLogin}
                   handleLogout={handleLogout}
+                  handleLogoutClick={handleLogoutClick}
                 />
               )}
             />

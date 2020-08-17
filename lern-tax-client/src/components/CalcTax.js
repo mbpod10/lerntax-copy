@@ -368,7 +368,7 @@ const CalcTax = () => {
 
   return (
     <>
-      <p>
+      <p className="small-p">
         Note: Calculations May Be Off By As Much As $7 For Taxable Incomes Less
         Than $100K
       </p>

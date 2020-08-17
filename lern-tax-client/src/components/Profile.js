@@ -37,6 +37,22 @@ const Profile = (props) => {
   }, []);
   console.log("information", information);
 
+  const deleteAccount = (event) => {
+    event.preventDefault();
+    console.log("delete");
+    props.handleLogoutClick();
+    axios
+      .delete(`${APIConfig}/users/${props.match.params.id}.json`)
+      .then((response) => {
+        console.log("res from  destroy", response);
+        props.history.push(`/`);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log("login error", error);
+      });
+  };
+
   const informationArray = information.map((element, index) => {
     return (
       <div className="info-div">
@@ -95,7 +111,13 @@ const Profile = (props) => {
       <h4>Status: {props.loggedInStatus}</h4> */}
       {user ? informationArray : null}
       <Link to={`/information/${props.user.id}`}>Edit Profile Here</Link> <br />
-      <Link to={`/tax-information`}>Add Tax Information Here</Link>
+      <Link to={`/tax-information`}>Add Tax Information Here</Link> <br />{" "}
+      <br />
+      <ReactBootStrap.Form onSubmit={deleteAccount}>
+        <ReactBootStrap.Button variant="primary" type="submit">
+          Delete Account
+        </ReactBootStrap.Button>{" "}
+      </ReactBootStrap.Form>
     </>
   );
 };

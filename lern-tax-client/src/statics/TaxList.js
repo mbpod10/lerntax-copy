@@ -99,6 +99,7 @@ const TaxList = () => {
             The standard deduction has increased since the new tax law. This
             deduction reduces your taxable income! <br />
             <Link to="/standard-deduction">More Here</Link>
+            {/* <a href="#SD">More Here</a> */}
           </div>
         </ReactBootStrap.Collapse>
       </>
@@ -179,7 +180,7 @@ const TaxList = () => {
   return (
     <>
       <div className="tax-steps">
-        <h1>Determine Your Tax Liabilty</h1>
+        <h1>The Basics</h1>
         <ReactBootStrap.ListGroup>
           <ReactBootStrap.ListGroup.Item variant="secondary">
             <GrossTaxableIncome2 />

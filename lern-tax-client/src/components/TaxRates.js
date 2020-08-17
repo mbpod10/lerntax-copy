@@ -21,7 +21,7 @@ const TaxRates = () => {
         </ReactBootStrap.Media.Body>
       </ReactBootStrap.Media>{" "}
       <h4>Marginal Tax Rates</h4> <br />
-      <p>2019 / 2020 Tax Season Brackets </p>
+      <p id="SD">2019 / 2020 Tax Season Brackets </p>
       <ReactBootStrap.Table striped bordered hover variant="dark">
         <thead>
           <tr>
